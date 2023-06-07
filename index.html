@@ -1,20 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-h1 {text-align: center;}
-p {text-align: center;}
-a {text-align: center;}
+body {
+  margin: 0 auto;
+  max-width: 800px;
+  padding: 0 20px;
+}
+
+.container {
+  border: 2px solid #e0e8dc;
+  background-color: #18b615;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.darker {
+  border-color: #ccc;
+  background-color: #ddd;
+}
+
+.container::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.container img {
+  float: left;
+  max-width: 60px;
+  width: 100%;
+  margin-right: 20px;
+  border-radius: 50%;
+}
+
+.container img.right {
+  float: right;
+  margin-left: 20px;
+  margin-right:0;
+}
+
+.time-right {
+  float: right;
+  color: #aaa;
+}
+
+.time-left {
+  float: left;
+  color: #6fda5a;
+}
+
+h1{
+      background-color: skyblue;
+    }
 </style>
+</head>
+<body>
 
-<h1 style="background-color: blue;">Hello ! <br> From T-Smart solution Ltd!</h1>
-<p>Currently we are using E-somo V1 no Update yet !! We will notify you via this platform if new update are available Thanks<br> 
-   Below are link for donloading the program,<br> 
+  <body>
+    <h1> Chat Messages Ask a Question</h1>
+   
+
+
+<div class="container">
+  <img src="/w3images/bandmember.jpg" alt="Avatar" style="width:100%;">
+  <p id="chatbox1">Hello. How are you today?</p>
+  <span class="time-right">11:00</span>
+</div>
+
+<div class="container darker">
+  <img src="/w3images/avatar_g2.jpg" alt="Avatar" class="right" style="width:100%;">
+  <p id="chatbox2">Hey! I'm fine. Thanks for asking!</p>
+  <span class="time-left" id="yes">11:01</span>
+</div>
+ <input type="text" id="userinput"/>
+    <button onclick="askQuestion()">Ask</button>
+    <div id="chatbox"></div>
+
+    <div style="position: relative;">
+      
+    </div>
+
+ <script> 
+ var userInput=""
  
-  N.B we have at least three servers(Download links )  for reliable service <br> if one link fails  please try another one.<br>
-        </p>
+   var yy1 = "What is your name?";
+    
+    let qaList = [
+  {
+    q: yy1,
+    a: "My name is AI Assistant"
+  },
+  {
+    q: "What is your purpose?",
+    a: "My purpose is to assist and answer your queries."
+  },
+  {
+    q: "How old are you?",
+    a: "I was created in 2021, so I am only a few months old."
+  }
+]
 
-<p> Alternative one : <br>
-<a href="https://github.com/E-somo/versionUpdate/raw/main/electronicspost-com-solved-problems-on-rectifiers-.pdf"> First link is here !</a> <br> </p>
-<p> Alternative two : <br>
-<a href="https://www.w3schools.com">Visit W3Schools.com!</a> <br> </p>
-<p> Alternative thee : <br>
-<a href="https://www.w3schools.com">Visit W3Schools.com!</a> <br>  </p> 
-<h1 style="background-color: green;">                                   Thank For Downloading Our Application Package ! <br> All the best wishes !!!!</h1>
+// Function to display the QA pairs in chatbox
+function displayQA(qa) {
+  let chatbox1 = document.getElementById("chatbox1");
+  let chatbox2 = document.getElementById("chatbox2");
+  let dated =document.getElementById("yes") 
+  
+  chatbox1.innerHTML += `<p><b>You:</b> ${qa.q}</p>`;
+  chatbox2.innerHTML += `<p><b>AI Assistant:</b> ${qa.a}</p>`;
+  dated.innerHTML="28/03/2023";
+}
+
+// Function to compare user input with available QA pairs
+function findMatchingQA(userInput) {
+  for(let i=0; i<qaList.length; i++) {
+    if(userInput.toLowerCase().includes(qaList[i].q.toLowerCase())) {
+      return qaList[i];
+    }
+  }
+  return null;
+}
+
+// Function to ask user input and display answer
+function askQuestion() { 
+
+  userInput = document.getElementById("userinput").value.trim(); 
+// let userInput = 
+  
+  // Check if user input is not empty
+  if(userInput == "") {
+    alert("Please ask me something");
+    return;
+  }
+
+  // Check if matching QA pair is found
+  let matchingQA = findMatchingQA(userInput);
+  if(matchingQA) {
+    displayQA(matchingQA);
+    document.getElementById("userinput").value = "";
+    return;
+  }
+
+  // Else display default response
+  let defaultRespose = {
+    q: userInput,
+    a: "I am sorry, but I don't have an answer for that yet."
+     
+  };
+  displayQA(defaultRespose);
+  document.getElementById("userinput").value = "";
+  myFunction()
+}  
+
+
+function myFunction() {
+  let person = prompt(userInput+" I am sorry, but I don't have an answer for that yet.Please enter your phone we will notify you once the answer is found ASAP", "07xxxxxxx");
+  if (person != null) {
+    
+  }
+}
+
+/// used to count and find probableqquestion 
+ 
+const string1 = "The quick brown  yego fox jumps over the lazy dog";
+const string2 = "The quick brown cat yego jumps over the lazy dog";
+const words1 = string1.split(" ");
+const words2 = string2.split(" ");
+
+const commonWords = words1.filter(word => words2.includes(word));
+//console.log(commonWords); 
+var yesed = ""+commonWords;
+var result = yesed.replaceAll(",", " ");
+
+let wordCount = result.split(" ").length;
+let wordCount2 =string1.split(" ").length;
+
+alert(result)
+alert(wordCount) 
+alert((wordCount/wordCount2)*100 +"%") 
+
+
+
+</script>
+  </body>
+</html>
