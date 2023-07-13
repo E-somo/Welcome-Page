@@ -1,15 +1,1533 @@
+
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Webpage Domain</title>
-  <script>
-    function getDomain() {
-      var domain = window.location.hostname;
-      alert("Current domain: " + domain);
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+
+
+.additional-button {
+      background-color: #008CBA;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      margin: 0 5px;
+      margin-top: 10px;
+      margin-right: 5px;
     }
-  </script>
+
+    .button-container {
+  display: flex;
+  justify-content: center; /* Adjust as per your alignment preference */
+}
+
+#charCount {
+      font-size: 12px;
+      color: gray;
+    }
+ /* Full-width input fields */
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.login-button {
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+.login-button:hover {
+  opacity: 0.8;
+}
+
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+  position: relative;
+}
+
+.fullmodal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  height: 100%;
+ 
+  overflow: auto;
+  background-color: rgba(238, 235, 235, 0.4);
+  padding-top: 60px;
+  padding: 16px;
+  margin: 0 auto;
+  max-width: 600px;
+
+
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button (x) */
+.close {
+  position: absolute;
+  right: 25px;
+  top: 0;
+  color: #000;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: red;
+  cursor: pointer;
+}
+
+/* Add Zoom Animation */
+.animate {
+  -webkit-animation: animatezoom 0.6s;
+  animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom {
+  from {-webkit-transform: scale(0)} 
+  to {-webkit-transform: scale(1)}
+}
+  
+@keyframes animatezoom {
+  from {transform: scale(0)} 
+  to {transform: scale(1)}
+}
+
+
+
+
+
+
+  .hidden {
+      display: none;
+    }
+
+    .loading-alert-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .loading-alert {
+      background-color: white;
+      padding: 20px;
+      border-radius: 5px;
+      text-align: center;
+    }
+    .loading-spinner {
+      border: 16px solid #f3f3f3;
+      border-top: 16px solid #3498db;
+      border-radius: 50%;
+      width: 120px;
+      height: 120px;
+      animation: spin 2s linear infinite;
+    }
+    .loading-text {
+      margin-top: 10px;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+
+
+
+#swal-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    #swal-table th,
+    #swal-table td {
+      padding: 8px;
+      border: 1px solid #ccc;
+    }
+    #swal-table th {
+      background-color: #f2f2f2;
+    }
+    
+    #swal-table td:first-child {
+      width: 5px; /* Adjust the width as needed */
+    }
+   #header {
+      text-align: center;
+    }
+
+    #buttonContainer {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+    }
+
+    #swal-container {
+      position: fixed;
+  z-index: 777;
+  left: 0;
+  top: 0;
+  width: 96%;
+  height: 90%;
+  overflow: auto;
+  background-color: rgb(237, 230, 230); /* Solid color */
+  padding-top: 60px;
+    }
+
+    #swal-replacer {
+
+      position: fixed;
+  z-index: 50;
+  left: 0;
+  top: 0;
+  width: 95%;
+  height: 90%;
+  overflow: auto;
+  background-color: rgb(237, 230, 230); /* Solid color */
+  padding-top: 60px;
+    }
+
+    button {
+      background-color: blue;
+      color: white;
+      padding: 10px;
+      border: none;
+      cursor: pointer;
+    }
+
+.kinyButton {
+      background-color: #ff0000;
+      color: #ffffff;
+    }
+
+    .engButton {
+      background-color: #00ff00;
+      color: #000000;
+    }
+
+    .frButton {
+      background-color: #0000ff;
+      color: #ffffff;
+    }
+
+
+body {
+  margin: 0 auto;
+  max-width: 800px;
+  padding: 0 20px;
+}
+
+.container {
+  border: 2px solid #e0e8dc;
+  border-radius: 5px;
+  background-color: #f3db29;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.user-container {
+  background-color: #18b615;
+}
+
+.assistant-container {
+  background-color: #ddd;
+}
+
+.container::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.container img {
+  float: left;
+  max-width: 60px;
+  width: 100%;
+  margin-right: 20px;
+  border-radius: 50%;
+}
+
+.container img.right {
+  float: right;
+  margin-left: 20px;
+  margin-right: 0;
+}
+
+.time-right {
+  float: right;
+  color: #aaa;
+}
+
+.time-left {
+  float: left;
+  color: #6fda5a;
+}
+
+h1 {
+  background-color: skyblue;
+}
+ .floating-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: green;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    h1 {
+      text-align: left;
+    }
+</style>
 </head>
 <body>
-  <button onclick="getDomain()">Get Domain</button>
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+<div id="id01" class="fullmodal">
+  
+  <div style="background-color:#71f23a" class="modal-content animate">
+    <div class="imgcontainer">
+      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+      
+    </div>
+
+    <div class="container">
+      <h id="adanced" style="font-size: 25px;"> <br> <br> <b>Advanced help /ubufasha bwisumbuye!</b></h>
+      <p id="aiReady" style="font-size: 25px;"><b>AI model Ready</b></p>
+      <p id="infailm"><b>You asked <i>(Mwabajije/ vous demandez)</i>:</b> <br> <br> <span id="blueText"> duhise tubona </span><spa id="infail"></spa></p>
+      <p id="infoready">choose languages</p>
+      <input id="aknow" type="text" placeholder="Enter your phone Number" required>
+     
+      <button id=buttonsender  onclick="submit2()">Submit </button>
+
+      <div class="button-container">
+        <button id="button1" class="additional-button">KINY</button>
+        <button id="button2" class="additional-button">ENGL</button>
+        <button id="button3" class="additional-button">FRENC</button>
+      </div>
+      <br> <br>
+      <center>
+      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">OK Thanks </button>
+    </center>
+    <br>
+      <label>
+        <input id="chekable" type="checkbox" checked="checked" name="remember"> Alert me if answer is found
+      </label>
+      
+      
+      
+    </div>
+
+    <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+
+    <div class="container" style="background-color:#71f23a">
+     
+    </div>
+  </div>
+</div>
+
+ 
+ 
+ 
+ <div id="header">
+    <h1   style="font-size: 18px;"   > T-Smart Solution Ltd AI Assistant </h1>
+  </div>
+  
+  <div id="buttonContainer">
+    <button onclick="showSwal()">Info</button>
+  </div>
+<button class="floating-button" onclick="showSms()">Recent chat</button> 
+
+
+
+
+<div id="chatbox">
+  <div class="container assistant-container">
+    
+    <img src="https://github.com/E-somo/ASAP/raw/main/avatarmodel.PNG" alt="Avatar" class="right" style="width:100%;">
+
+    <p><b>AI Assistant:</b> Hello. How are you today? <br> Muraho ? Ndi AI<small>( Artificial Intelligent)</small> assistant nsobanukiwe <b> amategeko y umuhanda </b> nizindi <b> serivice </b> za Tubimenye Smart Solution Ltd  mushobora kumbaza ikibazo mwifuza igisubizo  nkabasubiza ako kanya naho nta internet yaba ihari nagerageza !. Murakoze  </p>
+  <span id="time" class="time-right">13:56</span>
+  </div>
+</div>
+
+<div id="swal-container" class="hidden">
+  
+  <h1 id="header">Ibisubizo by'Ibibazo bitahise bibonerwa Ibisubizo</h1>
+  
+  <div id="tableContainer"></div>
+  <center>
+    <button onclick="hideSwal()">OK</button>
+    <p>Powered By Tubimenye Smart Solution Ltd</p>
+    <p>&copy;2018-<span id="currentYear"></span> All Rights Reserved</p>
+  </center>
+</div>
+
+<div id="swal-replacer" class="hidden">
+  <center>
+  <h1 id="header"> Messages Ziheruka/Recent Messages</h1>
+</center>
+    <p id="mychats"> all chat will be here</p>
+  <center>
+    <button onclick="hideSwal2()">Ok</button>
+    <button onclick="showElements()"> Ibitasubijwe</button>
+    <p>Powered By Tubimenye Smart Solution Ltd</p>
+    <p>&copy;2018-<span id="currentYear"></span> All Rights Reserved</p>
+  </center>
+</div>
+
+
+
+
+
+
+<div>
+  <textarea id="userinput"  rows="4" cols="50" oninput="updateCharacterCount()">  </textarea>
+  <div id="charCount">Characters: 0</div>
+  <button onclick="myDeterminat()">Ask</button>
+    <br> <br> <br> <br> <br><br><br> <br> <br> <br>
+    <p> .</p>
+    <br><br><br><br> <br> <br> <br>
+    <p> .</p>
+</div>
+
+
+<script>
+function _0x3cd5(){const _0x5812c5=['Good\x20evening!\x20How\x20was\x20your\x20day\x20at\x20the\x20art\x20exhibition?\x20\x20xhtht\x20Good\x20evening!\x20It\x20was\x20inspiring.\x20I\x20learned\x20some\x20incredible\x20artwork.\x20How\x20about\x20you?','Hey!\x20Warangije\x20gusoma\x20kiriya\x20gitabo\x20bavuze\x20xhtht\x20Hey!\x20Yego\x20narabikoze.\x20Byari\x20\x20bishimishije.\x20Binsaba\x20microseconds\x20kugirango\x20nsome\x20igitabo.\x20Waba\x20ufite\x20ibyifuzo\x20byibitabo?\x20\x09','Uncommon\x20Word\x20Count:','Hello!\x20Any\x20exciting\x20plans\x20for\x20the\x20upcoming\x20holiday?\x20xhtht\x20Hello!\x20Yes,\x20I\x27m\x20planning\x20to\x20get\x20update\x20on\x20what\x20is\x20up\x20in\x20the\x20world.\x20What\x20about\x20you?','Hi!\x20How\x27s\x20your\x20garden\x20looking\x20these\x20days?\x20xhtht\x20Hi!\x20\x20As\x20AI\x20model\x20I\x20don’t\x20have\x20any,\x20but\x20as\x20far\x20as\x20I\x20know\x20once\x20kept\x20well\x20gardens\x20\x20flourish\x20.\x20The\x20flowers\x20and\x20plants\x20becomes\x20thriving.\x20How\x20about\x20yours?','135313dyPJIk','Muraho!\x20Waryamye\x20neza?\x20xhtht\x20Muraho!\x20Yego\x20Nka\x20moderi\x20ya\x20artificial\x20intelligence\x20simfite\x20gahunda\x20yo\x20kuryama\x20mpora\x20ndi\x20maso\x20mubikorwa\x20remezo\x20bya\x20T-\x20Smart\x20Solution\x20Ltd\x20Niteguye\x20kugufasha!\x20Bite\x20wowe?\x09','Good\x20evening!\x20How\x20was\x20your\x20workout\x20today?xhtht\x20Good\x20evening!\x20It\x20was\x20intense\x20but\x20satisfying.\x20I\x20feel\x20energized.\x20How\x20about\x20your\x20fitness\x20routine?','1079118VqiwLb','Good\x20morning!\x20Did\x20you\x20sleep\x20well?\x20xhtht\x20Good\x20morning!<br>\x20\x20Yes,\x20As\x20Ai\x20model\x20\x20<u>I\x20\x20don’t\x20have\x20a\x20notion</u>\x20on\x20<br>\x20sleeping\x20I\x20always\x20awake\x20in\x20T-\x20Smart\x20Solution\x20Ltd\x20\x20cloud\x20infrastructure\x20ready\x20to\x20help\x20you!\x20How\x20about\x20you?','Hey!\x20Are\x20you\x20ready\x20for\x20the\x20party\x20tonight?\x20xhtht\x20Hey!\x20Absolutely!\x20I\x27m\x20looking\x20forward\x20to\x20celebrating\x20and\x20having\x20a\x20great\x20time\x20with\x20users.\x20Are\x20you\x20excited\x20too?\x20','trim','Hey!\x20Did\x20you\x20try\x20that\x20new\x20workout\x20class\x20everyone\x27s\x20talking\x20about?\x20xhtht\x20Hey!\x20Yes,\x20I\x20did.\x20It\x20was\x20challenging\x20but\x20fun.\x20Are\x20you\x20interested\x20in\x20trying\x20it\x20too?','Bonjour!\x20Comment\x20s\x27est\x20passé\x20ta\x20journée\x20à\x20l\x27école?\x20xhthtBonjour\x20!\x20Je\x20n\x27ai\x20pas\x20de\x20cours\x20physique,\x20mais\x20le\x20premier\x20mai\x20a\x20été\x20une\x20journée\x20productive.\x20J\x27ai\x20appris\x20des\x20choses\x20intéressantes.\x20Et\x20le\x20tien?','Hey!\x20Have\x20you\x20tried\x20that\x20new\x20coffee\x20shop\x20in\x20town?\x20\x20xhthtHey!\x20As\x20AI\x20model\x20I\x20can\x20not\x20eat\x20or\x20drink,\x20I\x20am\x20wishing\x20you\x20to\x20have\x20an\x20amazing\x20\x20coffee\x20\x20shop\x20where\x20you\x20fell\x20relaxed\x20!\x20\x20','split','Bonjour!\x20Comment\x20va\x20votre\x20animal\x20?\x20xhthtBonjour\x20!\x20En\x20tant\x20que\x20modèle\x20d\x27IA,\x20je\x20ne\x20possède\x20rien\x20d\x27autre\x20que\x20des\x20compétences\x20et\x20des\x20connaissances,\x20mais\x20pour\x20autant\x20que\x20je\x20sache,\x20les\x20animaux\x20de\x20compagnie\x20apportent\x20tellement\x20de\x20joie\x20à\x20la\x20vie.\x20Et\x20votre\x20ami\x20à\x20quatre\x20pattes\x20?','280inepfa','Good\x20afternoon!\x20How\x27s\x20your\x20favorited\x20sports\x20team\x20doing?\x20xhthtGood\x20afternoon!\x20I\x20like\x20to\x20be\x20aware\x20of\x20\x20\x20seasons.\x20I\x27m\x20excited\x20to\x20support\x20anyhow.\x20How\x20about\x20your\x20team?','Uraho!\x20Icyumweru\x20cyawe\x20cyagenze\x20gute?\x20xhtht\x20Muraho!\x20Icyumweru\x20cyanjye\x20cyari\x20cyiza.\x20Nagize\x20amahirwe\x20yo\x20gukuramo\x20no\x20kumarana\x20umwanya\x20nabankoresha\x20\x20benshi\x20kandi\x20ni\x20byiza\x09','Hey!\x20Akazi\x20kawe\x20gashya\x20kameze\x20gute?\x20xhtht\x20Hey!\x20Akazi\x20kanjye\x20gashya\x20kagenda\x20neza.\x20Nishimiye\x20ibibazo\x20kandi\x20niga\x20byinshi\x20nivugurura\x20ubwanjye.\x09','substring','Hey!\x20Long\x20time\x20no\x20see.\x20What\x20have\x20you\x20been\x20up\x20to?\x20xhtht\x20Hey!\x20Perhaps\x20,\x20it\x27s\x20been\x20a\x20while.\x20I\x27ve\x20been\x20keeping\x20busy\x20with\x20work\x20and\x20some\x20updates\x20.\x20How\x20about\x20you?','Hi!\x20How\x27s\x20your\x20garden\x20looking\x20these\x20days?\x20xhthtHi!\x20\x20As\x20AI\x20model\x20I\x20don’t\x20have\x20any,\x20but\x20as\x20far\x20as\x20I\x20know\x20once\x20kept\x20well\x20gardens\x20\x20flourish\x20.\x20The\x20flowers\x20and\x20plants\x20becomes\x20thriving.\x20How\x20about\x20yours?','Bon\x20après-midi!\x20Vous\x20profitez\x20du\x20beau\x20temps\x20?\x20xhthtBon\x20après-midi\x20!\x20En\x20tant\x20que\x20modèle\x20AI,\x20je\x20suis\x20sécurisé,\x20ma\x20température\x20ambiante\x20est\x20agréable.\x20J\x27espère\x20que\x20vous\x20appréciez\x20votre\x20région,\x20c\x27est\x20mon\x20souhait.','Umugoroba\x20mwiza!\x20Uyu\x20munsi\x20imyitozo\x20yawe\x20yari\x20ite?\x20xhtht\x20Umugoroba\x20mwiza!\x20Byari\x20bikomeye\x20ariko\x20biranyuze.\x20Ndumva\x20mfite\x20imbaraga.numgutse\x20byinshi\x20uyu\x20musi\x09','Hey\x20there!\x20What\x27s\x20new?Hey\x20there!\x20xhtht\x20Hey!\x20Not\x20much,\x20just\x20enjoying\x20<br>\x20helping\x20people.\x20How\x20about\x20you?','https://docs.google.com/spreadsheets/d/1XdMhPVsxoem3_5QcwTZH1K3XPk8DHAYolARGhFUjuSI/gviz/tq?gid=0','Hey!\x20Did\x20you\x20finish\x20reading\x20that\x20book\x20you\x20mentioned?\x20xhtht\x20Hey!\x20Yes,\x20I\x20did.\x20It\x20was\x20a\x20captivating\x20read.\x20It\x20takes\x20me\x20some\x20microseconds\x20to\x20read\x20the\x20book.\x20\x20Do\x20you\x20have\x20any\x20book\x20recommendations?','Hi!\x20How\x20was\x20your\x20weekend\x20getaway?\x20xhtht\x20Hi!\x20It\x20was\x20amazing.\x20I\x20had\x20a\x20wonderful\x20time\x20exploring\x20a\x20new\x20ideas.\x20How\x20about\x20you?','Bonjour!\x20Avez-vous\x20bien\x20dormi?\x20xhthtBonjour\x20!\x20Oui,\x20en\x20tant\x20que\x20modèle\x20IA,\x20je\x20n\x27ai\x20pas\x20de\x20notion\x20sur\x20le\x20sommeil,\x20je\x20suis\x20toujours\x20éveillé\x20dans\x20l\x27infrastructure\x20cloud\x20de\x20T-\x20Smart\x20Solution\x20Ltd,\x20prêt\x20à\x20vous\x20aider\x20!\x20Et\x20toi?','Muraho!\x20Wagize\x20ibitotsi\x20byiza?\x20xhtht\x20Muraho!\x20Mumbabarire\x20Nka\x20moderi\x20ya\x20AI\x20mpora\x20ndi\x20maso\x20kugirango\x20dusabane\x20kandi\x20nunguke\x20ubumenyi\x20nubumenyi\x20bushya!.\x09','default','forEach','Mutegereze\x20gato\x20AI\x20model\x20mushobora\x20kuganira\x20','Muraho\x20neza!\x20Wagize\x20ifunguro\x20rya\x20sasita\x20ryiza?\x20xhtht\x20Nka\x20moderi\x20ya\x20AI\x20sindya\x20nk\x27abantu.\x20Murakoze!\x09','Bonjour!\x20Comment\x20allez-vous\x20aujourd\x27hui?\x20xhtht\x20Salut\x20!\x20Je\x20vais\x20très\x20bien\x20et\x20je\x20suis\x20prêt\x20à\x20aider.\x20Merci\x20d\x27avoir\x20posé\x20la\x20question!','My\x20name\x20is\x20Tubimenye\x20smart\x20solution\x20Ltd\x20AI\x20Assistant','Hello!\x20How\x20was\x20your\x20day\x20at\x20school?\x20xhtht\x20Hello!\x20I\x20don’t\x20have\x20a\x20physical\x20class\x20,\x20but\x20may\x20day\x20\x20\x20was\x20a\x20productive\x20day.\x20I\x20learned\x20some\x20interesting\x20things.\x20How\x20about\x20yours?','rows','233742YhZENf','Hello!\x20Have\x20you\x20attended\x20any\x20interesting\x20conferences\x20lately?\x20xhtht\x20Hello!\x20Yes,\x20I\x20attended\x20a\x20conference\x20recently.\x20It\x20was\x20informative\x20and\x20engaging.\x20How\x20about\x20you?\x20','uncommonWordCount','Hi!\x20How\x27s\x20your\x20day\x20going\x20so\x20far?\x20xhtht\x20Hi!\x20It\x27s\x20going\x20well.\x20I\x27ve\x20been\x20busy,\x20but\x20everything\x20is\x20good.\x20And\x20you?','Bonjour!\x20Des\x20plans\x20excitants\x20pour\x20les\x20vacances\x20à\x20venir?\x20xhthtBonjour\x20!\x20Oui,\x20je\x20prévois\x20de\x20me\x20tenir\x20au\x20courant\x20de\x20ce\x20qui\x20se\x20passe\x20dans\x20le\x20monde.\x20Et\x20toi?','Hi!\x20How\x27s\x20everything\x20going\x20in\x20your\x20world?\x20xhtht\x20Hi!\x20Everything\x20is\x20<i>italicized\x20text</i>\x20\x20<strong>strong\x20text</strong>\x20H<sub>2</sub>O\x20\x2010<sup>th</sup>\x20<strike>strikethrough\x20text</strike>\x20\x20going\x20\x20<br>\x20\x20<br>\x20new\x20lines\x20<br>\x20<br>\x20smoothly.\x20Can\x27t\x20complain.\x20What\x20about\x20you?','Hey!\x20How\x20was\x20your\x20day\x20at\x20work?\x20xhtht\x20Hey!\x20It\x20was\x20productive,\x20but\x20a\x20bit\x20busy.\x20How\x20about\x20yours?','Hello!\x20How\x27s\x20your\x20hobby\x20project\x20coming\x20along?\x20xhtht\x20Hello!\x20It\x27s\x20going\x20well.\x20I\x27m\x20enjoying\x20working\x20on\x20it\x20during\x20my\x20free\x20time.\x20How\x20about\x20your\x20hobbies?','Hi\x20there!\x20Did\x20you\x20try\x20that\x20new\x20restaurant\x20everyone\x20is\x20talking\x20about?\x20xhtht\x20Hi!\x20As\x20AI\x20model\x20\x20I\x20don’t\x20eat\x20\x20I\x20am\x20always\x20powered\x20by\x20a\x20strong\x20UPS.\x20','userinput','Hey!\x20Ufite\x20gahunda\x20ki\x20uyu\x20munsi?\x20xhtht\x20Guhora\x20Mpagaze\x20\x20neza\x20kandi\x20Niteguye\x20gufasha.\x09','Salut!\x20Quoi\x20de\x20neuf?\x20xhtht\x20Hey\x20!\x20Pas\x20grand-chose,\x20juste\x20du\x20plaisir\x20à\x20aider\x20les\x20gens.\x20Et\x20toi?','Bonjour!\x20Prêt\x20à\x20affronter\x20la\x20journée\x20?\x20xhthtBonjour\x20!\x20Absolument!\x20Je\x20me\x20sens\x20plein\x20d\x27énergie\x20et\x20prêt\x20à\x20affronter\x20tout\x20ce\x20qui\x20se\x20présente\x20à\x20moi.\x20Et\x20toi?','myswalFi','similarityPercentage','Good\x20morning!\x20Did\x20you\x20catch\x20up\x20on\x20your\x20favorited\x20TV\x20show?\x20xhtht\x20Good\x20morning!\x20Yes,\x20I\x20did.\x20It\x27s\x20always\x20nice\x20to\x20relax\x20and\x20enjoy\x20a\x20good\x20show.\x20How\x20about\x20you?','fire','Uraho!\x20Umuryango\x20wawe\x20umeze\x20ute?\x20xhtht\x20Muraho!\x20Nka\x20AI\x20model\x20\x20nta\x20muryango\x20cyangwa\x20umubano\x20uwo\x20ari\x20wo\x20wose\x20ngira\x20\x09','Muraho!\x20Icyumweru\x20cyawe\x20cyagenze\x20gute?\x20xhtht\x20Muraho!\x20Byari\x20bitangaje.\x20Nagize\x20ibihe\x20byiza\x20byo\x20gusuzuma\x20ibitekerezo\x20bishya.\x20\x09','getElementById','Muraho!\x20Ibintu\x20byose\x20bigenda\x20gute\x20mwisi\x20yawe?\x20xhtht\x20Muraho!\x20Ibintu\x20byose\x20bigenda\x20neza.\x20sinshobora\x20kwitotomba\x20\x20ahubwo\x20nishimira\x20gufasha\x20cyane\x09','Umugoroba\x20mwiza!\x20Gahunda\x20nshya\x20\x20zose\x20zishimishije\x20kuri\x20uyu\x20mugoroba?\x20xhtht\x20Umugoroba\x20mwiza!\x20Ntabushya\x20cyane\x20\x20rwose\x20nteganya\x20gusa\x20kubona\x20ubumenyi\x20\x20bushya\x20niyo\x20gahunda.\x09','makuzungu\x20ni\x20iki\x20?xhtht\x20\x20ni\x20ikintabiziga\x20cyose\x20gikururwa','Good\x20morning!\x20Did\x20you\x20have\x20a\x20good\x20night\x27s\x20sleep?\x20xhtht\x20Good\x20morning!\x20Sorry\x20,\x20As\x20AI\x20model\x20I\x20am\x20always\x20awake\x20to\x20interacts\x20and\x20hain\x20new\x20skill\x20and\x20knowledge!.\x20How\x20about\x20you?','log','Muraho!\x20Wishimiye\x20ibirori\x20biri\x20imbere?\x20xhtht\x20Muraho!\x20Rwose!\x20Birangoye\x20\x20kubitegereza.\x20Bizaba\x20bishimishije\x20cyane.\x20Nzunguka\x20byinshi\x20\x09','Bonjour!\x20Avez-vous\x20rattrapé\x20votre\x20émission\x20de\x20télévision\x20préférée?\x20xhthtBonjour\x20!\x20Oui\x20je\x20l\x27ai\x20fait.\x20C\x27est\x20toujours\x20agréable\x20de\x20se\x20détendre\x20et\x20de\x20profiter\x20d\x27un\x20bon\x20spectacle.\x20Et\x20toi?','Hé!\x20Comment\x20s\x27est\x20passée\x20votre\x20journée\x20au\x20travail\x20?\x20xhtht\x20Hey\x20!\x20C\x27était\x20productif,\x20mais\x20un\x20peu\x20chargé.\x20Et\x20le\x20tien?','Salut!\x20Comment\x20ça\x20va\x20dans\x20votre\x20monde\x20?\x20xhtht\x20Salut\x20!\x20Tout\x20se\x20passe\x20bien.\x20Je\x20ne\x20peux\x20pas\x20me\x20plaindre.\x20Et\x20toi?','Good\x20evening!\x20How\x20was\x20your\x20day?\x20xhtht\x20Good\x20evening!\x20My\x20day\x20was\x20good,\x20thank\x20you.\x20How\x20about\x20yours?\x20','Bonjour!\x20Avez-vous\x20passé\x20une\x20bonne\x20nuit?\x20xhthtBonjour\x20!\x20Désolé,\x20en\x20tant\x20que\x20modèle\x20d\x27IA,\x20je\x20suis\x20toujours\x20éveillé\x20pour\x20interagir\x20et\x20acquérir\x20de\x20nouvelles\x20compétences\x20et\x20connaissances\x20!.\x20Et\x20toi?','Hey!\x20Have\x20you\x20tried\x20that\x20new\x20coffee\x20shop\x20in\x20town?\x20\x20xhtht\x20Hey!\x20As\x20AI\x20model\x20I\x20can\x20not\x20eat\x20or\x20drink,\x20I\x20am\x20wishing\x20you\x20to\x20have\x20an\x20amazing\x20\x20coffee\x20\x20shop\x20where\x20you\x20fell\x20relaxed\x20!\x20\x20','Muraho!\x20Witeguye\x20gufata\x20umunsi?\x20xhtht\x20Muraho!\x20Rwose!\x20Mfite\x20imitekerereze\x20myiza\x20kandi\x20niteguye\x20gukoresha\x20neza\x20umunsi.\x09','parse','filter','substr','Good\x20evening!\x20Any\x20exciting\x20plans\x20for\x20tonight?\x20xhtht\x20Good\x20evening!\x20Not\x20really,\x20just\x20planning\x20to\x20get\x20skill\x20and\x20knowledge\x20\x20from\x20users.\x20How\x20about\x20you?','Bonjour!\x20Avez-vous\x20assisté\x20à\x20des\x20conférences\x20intéressantes\x20dernièrement\x20?\x20xhthtBonjour\x20!\x20Oui,\x20j\x27ai\x20assisté\x20à\x20une\x20conférence\x20récemment.\x20C\x27était\x20instructif\x20et\x20engageant.\x20Et\x20toi?','Hé!\x20Comment\x20s\x27est\x20passée\x20ta\x20journée\x20au\x20parc\x20d\x27attractions\x20?\x20xhtht\x20Hey\x20!\x20J\x27aime\x20savoir\x20à\x20quel\x20point\x20les\x20gens\x20s\x27amusent.\x20tout\x20ce\x20qu\x27ils\x20peuvent\x20faire\x20comme\x20l\x27équitation\x20et\x20les\x20attractions.\x20Et\x20toi?','Hé!\x20Êtes-vous\x20prêt\x20pour\x20la\x20fête\x20ce\x20soir\x20?\x20xhtht\x20Hey\x20!\x20Absolument!\x20J\x27ai\x20hâte\x20de\x20célébrer\x20et\x20de\x20passer\x20un\x20bon\x20moment\x20avec\x20les\x20utilisateurs.\x20Êtes-vous\x20excité\x20aussi?','Similarity\x20Percentage:','Hello!\x20How\x20are\x20you\x20today?\x20xhtht\x20Hi!\x20I\x27m\x20doing\x20<b>\x20great\x20</b>\x20and\x20ready\x20to\x20help.\x20Thanks\x20for\x20asking!','replace','Hi\x20there!\x20How\x27s\x20your\x20latest\x20DIY\x20project\x20going?\x20xhtht\x20Hi!\x20It\x27s\x20going\x20well.\x20I\x27m\x20enjoying\x20the\x20creative\x20process.\x20How\x20about\x20your\x20projects?','index','4789424yFVbCO','length','Salut!\x20Comment\x20se\x20passe\x20votre\x20parcours\x20d\x27apprentissage\x20des\x20langues\x20?\x20xhtht\x20Salut\x20!\x20Ça\x20va\x20bien.\x20Je\x20progresse\x20et\x20j\x27apprécie\x20le\x20processus.\x20Et\x20vos\x20études\x20de\x20langues\x20?','Hi!\x20How\x27s\x20your\x20home\x20renovation\x20project\x20going?\x20xhtht\x20Hi!\x20It\x27s\x20going\x20well.\x20The\x20renovations\x20are\x20coming\x20together\x20nicely.\x20How\x20about\x20your\x20home\x20projects?','some','getItem','Bonne\x20soirée!\x20Des\x20plans\x20excitants\x20pour\x20ce\x20soir?\x20xhthtBonsoir\x20!\x20Pas\x20vraiment,\x20je\x20prévois\x20simplement\x20d\x27acquérir\x20des\x20compétences\x20et\x20des\x20connaissances\x20auprès\x20des\x20utilisateurs.\x20Et\x20toi?','Salut!\x20Quel\x20temps\x20fait-il\x20dans\x20votre\x20région\x20?\x20xhtht\x20Salut\x20!\x20Je\x20suis\x20toujours\x20partout\x20en\x20ligne\x20!\x20Si\x20votre\x20temps\x20est\x20assez\x20agréable\x20ici.\x20J\x27apprécie\x20votre\x20interaction\x20et\x20votre\x20confort\x20Merci.','iyi\x20ni\x20intambwe\x20nziza\x20muteye\x20mu\x20ikorana\x20buhanga\x20rizafasha\x20benshi\x20cyane\x20\x20xhtht\x20\x20Murakoze\x20hari\x20igitekerezo\x20cyangwa\x20icyifuzo\x20mwatwamdikira\x20Murakoze\x20nanone\x20','Muraho!\x20witeguye\x20guhangana\x20n\x27umunsi?\x20xhtht\x20Muraho!\x20Rwose!\x20Ndumva\x20mfite\x20imbaraga\x20kandi\x20niteguye\x20kuzuza\x20ibyo\x20nsabwa\x20byose\x20a\x20byose.\x09','myValueChat','Salut!\x20Comment\x20se\x20présente\x20votre\x20dernier\x20projet\x20artistique\x20?\x20xhtht\x20Salut\x20!\x20Il\x20s\x27avère\x20magnifiquement.\x20J\x27ai\x20hâte\x20de\x20voir\x20la\x20pièce\x20finie.\x20Qu\x27en\x20est-il\x20de\x20vos\x20projets\x20artistiques\x20?','Muraho\x20neza!\x20Wishimiye\x20ikirere?\x20xhtht\x20Muraho\x20neza!\x20Nka\x20moderi\x20ya\x20AI\x20mfite\x20umutekano\x20ubushyuhe\x20bw’ahondi\x20ni\x20bwiza.\x20Ndizera\x20ko\x20wishimiye\x20akarere\x20kawe\x20ni\x20icyifuzo\x20cyanjye.\x09','Uraho!\x20Uyu\x20munsi\x20umeze\x20ute?\x20xhtht\x20Muraho!\x20Ndimo\x20gukora\x20cyane\x20kandi\x20niteguye\x20gufasha\x20benshi.\x20Urakoze\x20kubaza!','377784FkHmrs','Hi!\x20How\x20was\x20your\x20trip\x20to\x20the\x20beach?\x20xhtht\x20AS\x20AI\x20model\x20I\x20can’t\x20physically\x20access\x20It\x20,\x20I\x20wish\x20you\x20to\x20have\x20a\x20fantastic\x20one\x20','Salut!\x20Comment\x20s\x27est\x20passé\x20votre\x20week-end\x20?\x20xhtht\x20Salut\x20!\x20C\x27était\x20incroyable.\x20J\x27ai\x20passé\x20un\x20moment\x20merveilleux\x20à\x20explorer\x20de\x20nouvelles\x20idées.\x20Et\x20toi?\x20','Muraho!\x20Umunsi\x20wawe\x20mwishuri\x20wagenze\x20ute?\x20xhtht\x20Muraho!\x20Ntabwo\x20nfite\x20amasomo\x20ari\x20physical\x20\x20ariko\x20\x20uyu\x20umunsi\x20ushobora\x20kuba\x20umunsi\x20utanga\x20umusaruro.\x20Nize\x20ibintu\x20bishimishije.\x09','Hello!\x20How\x27s\x20your\x20family\x20doing?\x20xhtht\x20Hello!\x20As\x20I\x20model\x20I\x20don’t\x20have\x20a\x20family\x20or\x20any\x20relationship\x20.','Muraho!\x20Ikirere\x20kimeze\x20gute\x20mukarere\x20kawe?\x20xhtht\x20Muraho!\x20Nama\x20ndi\x20ahantu\x20hose\x20kumurongo!(online)\x20\x20Niba\x20ikirere\x20cyawe\x20kimeze\x20neza\x20hano.\x20Nishimiye\x20imikoranire\x20yawe\x20kandi\x20ndagushimira\x20Urakoze.\x09','Hey\x20ngaho!\x20Ni\x20iki\x20gishya?\x20xhtht\x20Hey!\x20Ntabwo\x20ari\x20byinshi\x20gusa\x20Nishimira\x20gufasha\x20abantu.\x09','Hello!\x20How\x27s\x20your\x20new\x20car\x20treating\x20you?\x20xhtht\x20Hello!\x20\x20I\x20don’t\x20have\x20any\x20physical\x20object\x20but\x20I\x20wish\x20you\x20My\x20new\x20fantastic\x20car\x20and\x20a\x20joy\x20to\x20drive.','table','Umugoroba\x20mwiza!\x20Umunsi\x20wawe\x20wabaye\x20ute\x20mu\x20imurikagurisha?\x20xhtht\x20Umugoroba\x20mwiza!\x20Byaranshimishije.\x20Nize\x20ibihangano\x20bidasanzwe','showLoading','xhtht','Good\x20morning!\x20Are\x20you\x20ready\x20to\x20seize\x20the\x20day?\x20\x20xhtht\x20Good\x20morning!\x20Absolutely!\x20I\x20have\x20a\x20positive\x20mindset\x20and\x20ready\x20to\x20make\x20the\x20most\x20of\x20the\x20day.\x20How\x20about\x20you?','Muraho!\x20Gahunda\x20zose\x20zishimishije\x20mu\x20biruhuko\x20biri\x20imbere?\x20xhtht\x20Muraho!\x20Yego\x20ndateganya\x20kubona\x20amakuru\x20Menshi\x20ku\x20bibera\x20ku\x20isi.\x20\x09','toLowerCase','Hé!\x20Comment\x20se\x20passe\x20votre\x20nouveau\x20travail\x20?\x20xhtht\x20Hey\x20!\x20Mon\x20nouveau\x20travail\x20se\x20passe\x20bien.\x20J\x27aime\x20les\x20défis\x20et\x20j\x27apprends\x20beaucoup\x20en\x20me\x20mettant\x20à\x20jour.\x20Et\x20toi?','ni\x20byiza\x20ndabishimye\x20xhtht\x20Natwe\x20biratunejeje\x20cyane\x20pe\x20','Hey!\x20Did\x20you\x20finish\x20reading\x20that\x20book\x20you\x20mentioned?\x20xhthtHey!\x20Yes,\x20I\x20did.\x20It\x20was\x20a\x20captivating\x20read.\x20It\x20takes\x20me\x20some\x20microseconds\x20to\x20read\x20the\x20book.\x20\x20Do\x20you\x20have\x20any\x20book\x20recommendations?','Muraho!\x20Wagerageje\x20iryo\x20funguro\x20rishya\x20se\x20xhtht\x20Muraho!\x20infunguro\x20!!\x20Ntabwo\x20ndya\x20nka\x20Muntu\x20Murakoze.\x09','Muraho!\x20Umushinga\x20wawe\x20DIY\x20uheruka\x20kugenda\x20ute?\x20xhtht\x20Muraho!\x20Biragenda\x20neza.\x20Nishimiye\x20inzira\x20yo\x20guhanga\x20udushya\x20.\x09','Hello!\x20How\x27s\x20your\x20pet\x20doing?\x20xhtht\x20Hello!\x20As\x20AI\x20model\x20I\x20don’t\x20own\x20anything\x20other\x20than\x20skill\x20and\x20knowledge\x20but\x20as\x20far\x20as\x20I\x20know\x20,\x20pets\x20bring\x20so\x20much\x20joy\x20to\x20\x20life.\x20How\x20about\x20your\x20furry\x20friend?','Salut!\x20Avez-vous\x20vu\x20de\x20bons\x20films\x20dernièrement\x20?\x20xhthtEn\x20tant\x20que\x20modèle\x20Ai,\x20je\x20n\x27ai\x20pas\x20accès\x20aux\x20films\x20et\x20aux\x20éléments\x20audio.\x20Merci\x20d\x27avoir\x20posé\x20la\x20question.','Muraho!\x20Urugendo\x20rwo\x20kwiga\x20ururimi\x20rwawe\x20rugenda\x20rute?\x20xhtht\x20Muraho!\x20Biragenda\x20neza.\x20Ndatera\x20imbere\x20kandi\x20nishimiye\x20inzira.\x09','Hé!\x20Cela\x20fait\x20longtemps\x20qu\x27on\x20ne\x20s\x27est\x20pas\x20vu.\x20Qu\x27avez-vous\x20fait\x20?\x20xhtht\x20Hey\x20!\x20Peut-être,\x20ça\x20fait\x20un\x20moment.\x20J\x27ai\x20été\x20occupé\x20par\x20le\x20travail\x20et\x20quelques\x20mises\x20à\x20jour.\x20Et\x20toi?','1316840VIkNbe','Best\x20match:','Salut!\x20Comment\x20se\x20passe\x20votre\x20bénévolat\x20?\x20xhtht\x20Salut\x20!\x20Ça\x20va\x20bien.\x20Je\x20trouve\x20gratifiant\x20de\x20redonner\x20à\x20la\x20communauté.\x20Que\x20diriez-vous\x20de\x20votre\x20expérience\x20de\x20bénévolat?','Hi!\x20Are\x20you\x20excited\x20about\x20the\x20upcoming\x20event?\x20xhtht\x20Hi!\x20Absolutely!\x20I\x20can\x27t\x20wait\x20for\x20it.\x20It\x27s\x20going\x20to\x20be\x20so\x20much\x20fun.\x20How\x20about\x20you?','Good\x20morning!\x20Are\x20you\x20ready\x20to\x20seize\x20the\x20day?\x20\x20xhthtGood\x20morning!\x20Absolutely!\x20I\x20have\x20a\x20positive\x20mindset\x20and\x20ready\x20to\x20make\x20the\x20most\x20of\x20the\x20day.\x20How\x20about\x20you?','value','slice','concat','Good\x20afternoon!\x20Did\x20you\x20have\x20a\x20nice\x20lunch?\x20xhtht\x20As\x20AI\x20model\x20I\x20don’t\x20eat\x20like\x20Humans.\x20','15004HqAhPg','Hey!\x20How\x27s\x20your\x20new\x20job\x20treating\x20you?\x20xhtht\x20Hey!\x20My\x20new\x20job\x20is\x20going\x20well.\x20I\x27m\x20enjoying\x20the\x20challenges\x20and\x20learning\x20a\x20lot\x20by\x20updating\x20myself.\x20How\x20about\x20you?','Bonjour\x20à\x20tous!\x20Comment\x20avance\x20le\x20projet\x20?\x20xhtht\x20Salut\x20!\x20Le\x20projet\x20avance\x20bien.\x20Nous\x20progressons\x20bien.\x20Et\x20vos\x20projets\x20?','Muraho!\x20Umushinga\x20uragenda\x20ute?\x20xhtht\x20Muraho!\x20Umushinga\x20uratera\x20imbere\x20neza.\x20Turimo\x20gutera\x20imbere\x20neza.\x20Twunguka\x20byinshi\x09','Salut!\x20Comment\x20se\x20passe\x20votre\x20projet\x20de\x20rénovation\x20de\x20maison\x20?\x20xhtht\x20Salut\x20!\x20Ça\x20va\x20bien.\x20Les\x20rénovations\x20s\x27enchaînent\x20bien.\x20Que\x20diriez-vous\x20de\x20vos\x20projets\x20de\x20maison?','Hey!\x20What\x27s\x20your\x20plan\x20for\x20the\x20day?\x20xhtht\x20\x20To\x20be\x20always\x20standby\x20and\x20ready\x20to\x20help.\x20How\x20about\x20you?\x20\x20\x20\x20','setItem','Hey!\x20How\x20was\x20your\x20day\x20at\x20the\x20theme\x20park?\x20xhtht\x20Hey!\x20I\x20like\x20to\x20know\x20how\x20\x20so\x20much\x20fun\x20people\x20enjoys.\x20\x20all\x20they\x20can\x20do\x20like\x20riding\x20\x20and\x20attractions.\x20How\x20about\x20you?','Bonjour!\x20Comment\x20va\x20ta\x20famille\x20?\x20xhthtBonjour\x20!\x20Comme\x20je\x20suis\x20mannequin,\x20je\x20n\x27ai\x20pas\x20de\x20famille\x20ni\x20de\x20relation.','Bonne\x20soirée!\x20Comment\x20s\x27est\x20passée\x20votre\x20journée\x20à\x20l\x27exposition\x20d\x27art\x20?\x20xhthtBonsoir\x20!\x20C\x27était\x20inspirant.\x20J\x27ai\x20appris\x20des\x20œuvres\x20d\x27art\x20incroyables.\x20Et\x20toi?','Bonjour!\x20Comment\x20votre\x20nouvelle\x20voiture\x20vous\x20traite-t-elle\x20?\x20xhthtBonjour\x20!\x20Je\x20n\x27ai\x20pas\x20d\x27objet\x20physique\x20mais\x20je\x20vous\x20souhaite\x20Ma\x20nouvelle\x20voiture\x20fantastique\x20et\x20une\x20joie\x20de\x20conduire.','Hi!\x20How\x27s\x20your\x20language\x20learning\x20journey\x20going?\x20xhtht\x20Hi!\x20It\x27s\x20going\x20well.\x20I\x27m\x20making\x20progress\x20and\x20enjoying\x20the\x20process.\x20How\x20about\x20your\x20language\x20studies?','All\x20Chats','Hé!\x20Avez-vous\x20essayé\x20ce\x20nouveau\x20cours\x20d\x27entraînement\x20dont\x20tout\x20le\x20monde\x20parle\x20?\x20xhtht\x20Hey\x20!\x20Oui\x20je\x20l\x27ai\x20fait.\x20C\x27était\x20difficile\x20mais\x20amusant.\x20Êtes-vous\x20intéressé\x20à\x20l\x27essayer\x20aussi?','Hi!\x20Did\x20you\x20try\x20that\x20new\x20recipe\x20you\x20mentioned?\x20xhtht\x20Hi!\x20Recipe!!\x20I\x20don’t\x20eat\x20like\x20Humans\x20Thanks\x20.\x20','Hi\x20there!\x20How\x27s\x20your\x20latest\x20DIY\x20project\x20going?\x20xhthtHi!\x20It\x27s\x20going\x20well.\x20I\x27m\x20enjoying\x20the\x20creative\x20process.\x20How\x20about\x20your\x20projects?','Hi!\x20How\x27s\x20the\x20weather\x20in\x20your\x20area?\x20xhtht\x20Hi!\x20\x20I\x20am\x20always\x20every\x20where\x20online!\x20\x20If\x20your\x20weather\x20is\x20quite\x20pleasant\x20here.\x20I\x20enjoy\x20\x20your\x20interaction\x20and\x20conforts\x20\x20Thanks.\x20','Hi!\x20How\x27s\x20your\x20latest\x20art\x20project\x20shaping\x20up?\x20\x20xhtht\x20Hi!\x20It\x27s\x20turning\x20out\x20beautifully.\x20I\x20can\x27t\x20wait\x20to\x20see\x20the\x20finished\x20piece.\x20How\x20about\x20your\x20artistic\x20endeavours?\x09'];_0x3cd5=function(){return _0x5812c5;};return _0x3cd5();}const _0x23c6c9=_0x219b;(function(_0x397247,_0x2c647d){const _0x58bcd5=_0x219b,_0x44fc79=_0x397247();while(!![]){try{const _0x30bd44=-parseInt(_0x58bcd5(0x179))/0x1+-parseInt(_0x58bcd5(0x141))/0x2+parseInt(_0x58bcd5(0x19c))/0x3+-parseInt(_0x58bcd5(0x162))/0x4*(parseInt(_0x58bcd5(0x185))/0x5)+-parseInt(_0x58bcd5(0x17c))/0x6+parseInt(_0x58bcd5(0x159))/0x7+parseInt(_0x58bcd5(0x133))/0x8;if(_0x30bd44===_0x2c647d)break;else _0x44fc79['push'](_0x44fc79['shift']());}catch(_0x1dc6f3){_0x44fc79['push'](_0x44fc79['shift']());}}}(_0x3cd5,0x24c46));var languag=0x0,count=0x0,quite=0x0,indvalua=0x0,searchThis='',dynaIndex=0x0,timeString='',extraHelp='',extraHelpg='',querrFoneNr='',ExrtraHelpTiT='',extraHelpswal='I\x27m\x20sorry,\x20but\x20I\x20don\x27t\x20have\x20an\x20answer\x20for\x20that\x20yet.\x20Please\x20enter\x20your\x20phone\x20number.\x20I\x20will\x20notify\x20you\x20ASAP\x20once\x20the\x20answer\x20is\x20found\x20',morinfo='I\x27m\x20sorry,\x20\x20I\x20don\x27t\x20have\x20an\x20answer\x20for\x20that\x20right\x20now\x20!,\x20I\x20will\x20give\x20you\x20the\x20feedback\x20\x20ASAP,\x20after\x20\x20to\x20consulting\x20an\x20expert\x20.\x20\x20';if(localStorage['getItem'](_0x23c6c9(0x13d))===null)localStorage[_0x23c6c9(0x168)](_0x23c6c9(0x13d),_0x23c6c9(0x16e));else{}var questnTxt='What\x20is\x20your\x20name?',questnAnswer=_0x23c6c9(0x199),decide=0x0;function _0x219b(_0x26fc5d,_0x23fe53){const _0x3cd51d=_0x3cd5();return _0x219b=function(_0x219bce,_0x2dd821){_0x219bce=_0x219bce-0x10f;let _0x34dba6=_0x3cd51d[_0x219bce];return _0x34dba6;},_0x219b(_0x26fc5d,_0x23fe53);}let qaList=[];function startLoading(){const _0xf11963=_0x23c6c9;Swal[_0xf11963(0x116)]({'title':'Loading\x20.....','text':_0xf11963(0x196),'allowOutsideClick':![],'didOpen':()=>{const _0xf6cc7c=_0xf11963;Swal[_0xf6cc7c(0x14b)]();}});}var ivin=0x0,onAsk='',chatData=[];for(var ipsec=0x0;ipsec<0xc350;ipsec++){chatData[ipsec]=_0x23c6c9(0x194)+ipsec,ipsec==0xc346&&findinIt();}const string1='\x20it\x20is\x20ok\x20\x20';var strings=[];function populate(){const _0x24fc8c=_0x23c6c9;strings=['In\x20html\x20how\x20can\x20i\x20apply\x20\x20different\x20formats\x20\x20xhtht\x20var\x20message\x20=\x20This\x20is\x20a\x20<b>bold</b>\x20and\x20<i>italic</i>\x20message.;\x20var\x20htmlTags\x20=\x20/</?b>|</?u>|</?i>|</?strong>|</?sub>|</?sup>|</?strike>|<br>/i;\x20\x20if\x20(htmlTags.test(message))\x20{\x20\x20console.log(The\x20string\x20contains\x20one\x20or\x20more\x20of\x20the\x20specified\x20HTML\x20tags.);\x20}\x20else\x20{\x20console.log(The\x20string\x20does\x20not\x20contain\x20any\x20of\x20the\x20specified\x20HTML\x20tags.);\x20\x20learn\x20how\x20to\x20apply\x20these\x20formats\x20Thanks\x20\x20}',_0x24fc8c(0x12f),_0x24fc8c(0x17d),_0x24fc8c(0x18e),_0x24fc8c(0x19f),'Good\x20afternoon!\x20Are\x20you\x20enjoying\x20the\x20weather?\x20xhtht\x20\x20Good\x20afternoon!\x20As\x20AI\x20model\x20\x20I\x20am\x20secured,\x20my\x20ambient\x20temperature\x20is\x20lovely.\x20\x20I\x20hope\x20you\x27re\x20enjoying\x20your\x20area,\x20it\x20is\x20my\x20wish.',_0x24fc8c(0x18a),'Hi\x20there!\x20How\x27s\x20your\x20week\x20going?\x20xhtht\x20Hi!\x20My\x20week\x20is\x20going\x20well\x20so\x20far.\x20How\x20about\x20yours?',_0x24fc8c(0x12a),'Hello!\x20How\x20was\x20your\x20weekend?\x20xhtht\x20Hello!\x20My\x20weekend\x20was\x20great.\x20I\x20had\x20a\x20chance\x20to\x20unwind\x20and\x20spend\x20time\x20with\x20many\x20users.\x20How\x20about\x20yours?',_0x24fc8c(0x1a1),'Good\x20morning!\x20Ready\x20to\x20tackle\x20the\x20day?\x20xhtht\x20Good\x20morning!\x20Absolutely!\x20I\x27m\x20feeling\x20energized\x20and\x20ready\x20to\x20take\x20on\x20whatever\x20comes\x20my\x20way.\x20How\x20about\x20you?',_0x24fc8c(0x167),_0x24fc8c(0x145),_0x24fc8c(0x1a4),_0x24fc8c(0x1a2),'Hi!\x20Have\x20you\x20seen\x20any\x20good\x20movies\x20lately?\x20xhtht\x20\x20As\x20Ai\x20model\x20I\x20don’t\x20have\x20acess\x20to\x20Movies\x20and\x20audio\x20stuff.\x20Thanks\x20for\x20asking.\x20',_0x24fc8c(0x123),_0x24fc8c(0x177),_0x24fc8c(0x191),_0x24fc8c(0x17e),_0x24fc8c(0x11d),'Hi\x20there!\x20How\x27s\x20the\x20project\x20coming\x20along?\x20xhtht\x20Hi!\x20The\x20project\x20is\x20progressing\x20well.\x20We\x27re\x20making\x20good\x20progress.\x20How\x20about\x20your\x20projects?',_0x24fc8c(0x19a),_0x24fc8c(0x172),_0x24fc8c(0x161),_0x24fc8c(0x163),_0x24fc8c(0x170),_0x24fc8c(0x155),_0x24fc8c(0x15c),_0x24fc8c(0x17b),_0x24fc8c(0x190),_0x24fc8c(0x178),_0x24fc8c(0x14d),_0x24fc8c(0x1a3),_0x24fc8c(0x142),_0x24fc8c(0x125),_0x24fc8c(0x131),'Good\x20afternoon!\x20How\x27s\x20your\x20favorited\x20sports\x20team\x20doing?\x20xhtht\x20Good\x20afternoon!\x20I\x20like\x20to\x20be\x20aware\x20of\x20\x20\x20seasons.\x20I\x27m\x20excited\x20to\x20support\x20anyhow.\x20How\x20about\x20your\x20team?',_0x24fc8c(0x148),_0x24fc8c(0x16d),_0x24fc8c(0x174),_0x24fc8c(0x180),'Hi!\x20How\x27s\x20your\x20volunteer\x20work\x20going?\x20xhtht\x20Hi!\x20It\x27s\x20going\x20well.\x20I\x20find\x20it\x20fulfilling\x20to\x20give\x20back\x20to\x20the\x20community.\x20How\x20about\x20your\x20volunteering\x20experience?\x20',_0x24fc8c(0x19d),_0x24fc8c(0x136),_0x24fc8c(0x115),_0x24fc8c(0x169),_0x24fc8c(0x173),_0x24fc8c(0x12d),_0x24fc8c(0x124),_0x24fc8c(0x164),_0x24fc8c(0x181),_0x24fc8c(0x13a),'Bon\x20après-midi!\x20Avez-vous\x20eu\x20un\x20bon\x20déjeuner?\x20xhthtEn\x20tant\x20que\x20modèle\x20d\x27IA,\x20je\x20ne\x20mange\x20pas\x20comme\x20les\x20humains.',_0x24fc8c(0x150),'Salut!\x20Avez-vous\x20essayé\x20cette\x20nouvelle\x20recette\x20que\x20vous\x20avez\x20mentionnée\x20?\x20xhtht\x20Salut\x20!\x20Recette!!\x20Je\x20ne\x20mange\x20pas\x20comme\x20les\x20humains\x20Merci.',_0x24fc8c(0x184),'Salut!\x20Êtes-vous\x20enthousiasmé\x20par\x20l\x27événement\x20à\x20venir?\x20xhtht\x20Salut\x20!\x20Absolument!\x20Je\x20ne\x20peux\x20pas\x20attendre.\x20Ça\x20va\x20être\x20tellement\x20amusant.\x20Et\x20toi?\x20','Good\x20evening!\x20How\x20was\x20your\x20workout\x20today?xhthtGood\x20evening!\x20It\x20was\x20intense\x20but\x20satisfying.\x20I\x20feel\x20energized.\x20How\x20about\x20your\x20fitness\x20routine?',_0x24fc8c(0x152),_0x24fc8c(0x18b),_0x24fc8c(0x15d),'Hello!\x20How\x27s\x20your\x20hobby\x20project\x20coming\x20along?\x20xhthtHello!\x20It\x27s\x20going\x20well.\x20I\x27m\x20enjoying\x20working\x20on\x20it\x20during\x20my\x20free\x20time.\x20How\x20about\x20your\x20hobbies?','Hi!\x20How\x20was\x20your\x20trip\x20to\x20the\x20beach?\x20xhthtAS\x20AI\x20model\x20I\x20can’t\x20physically\x20access\x20It\x20,\x20I\x20wish\x20you\x20to\x20have\x20a\x20fantastic\x20one\x20',_0x24fc8c(0x182),_0x24fc8c(0x171),_0x24fc8c(0x186),_0x24fc8c(0x16c),_0x24fc8c(0x135),_0x24fc8c(0x16b),_0x24fc8c(0x16f),_0x24fc8c(0x15b),_0x24fc8c(0x12b),_0x24fc8c(0x166),_0x24fc8c(0x120),_0x24fc8c(0x12c),_0x24fc8c(0x13e),_0x24fc8c(0x198),_0x24fc8c(0x192),_0x24fc8c(0x111),'Salut!\x20Comment\x20se\x20passe\x20ta\x20journée\x20jusqu\x27à\x20présent?\x20xhtht\x20Salut\x20!\x20Ça\x20va\x20bien.\x20J\x27ai\x20été\x20occupé,\x20mais\x20tout\x20va\x20bien.\x20Et\x20toi?',_0x24fc8c(0x18c),_0x24fc8c(0x158),'Bonjour\x20à\x20tous!\x20Comment\x20se\x20passe\x20ta\x20semaine\x20?\x20xhtht\x20Salut\x20!\x20Ma\x20semaine\x20se\x20passe\x20bien\x20pour\x20l\x27instant.\x20Et\x20le\x20tien?',_0x24fc8c(0x139),'Bonjour!\x20Comment\x20c\x27est\x20passé\x20ton\x20week-end?\x20xhthtBonjour\x20!\x20Mon\x20week-end\x20a\x20été\x20super.\x20J\x27ai\x20eu\x20la\x20chance\x20de\x20me\x20détendre\x20et\x20de\x20passer\x20du\x20temps\x20avec\x20de\x20nombreux\x20utilisateurs.\x20Et\x20le\x20tien?',_0x24fc8c(0x122),_0x24fc8c(0x112),'Hé!\x20Quel\x20est\x20votre\x20plan\x20pour\x20la\x20journée\x20?\x20xhthtÊtre\x20toujours\x20en\x20attente\x20et\x20prêt\x20à\x20aider.\x20Et\x20toi?',_0x24fc8c(0x16a),'Bonjour\x20à\x20tous!\x20Avez-vous\x20essayé\x20ce\x20nouveau\x20restaurant\x20dont\x20tout\x20le\x20monde\x20parle\x20?\x20xhtht\x20Salut\x20!\x20En\x20tant\x20que\x20modèle\x20AI,\x20je\x20ne\x20mange\x20pas,\x20je\x20suis\x20toujours\x20alimenté\x20par\x20un\x20onduleur\x20puissant.',_0x24fc8c(0x121),_0x24fc8c(0x156),'Bonne\x20soirée!\x20Comment\x20s\x27est\x20passée\x20ta\x20journée?\x20xhthtBonsoir\x20!\x20Ma\x20journée\x20a\x20été\x20bonne,\x20merci.\x20Et\x20le\x20tien?',_0x24fc8c(0x1a0),_0x24fc8c(0x143),_0x24fc8c(0x140),_0x24fc8c(0x17a),_0x24fc8c(0x147),'Muraho!\x20Umunsi\x20wawe\x20ugenda\x20ute?\x20xhtht\x20Muraho!\x20Biragenda\x20neza.\x20Ndarahuze\x20ariko\x20byose\x20ni\x20byiza.\x09',_0x24fc8c(0x13f),'Hey!\x20Igihe\x20kinini\x20ntakubona.\x20Wakoraga\x20iki?\x20xhtht\x20Hey!\x20Birashoboka\x20ko\x20hashize\x20igihe.\x20Nakomeje\x20guhugira\x20mu\x20kazi\x20ndetse\x20no\x20kuvugurura\x20bimwe\x20byingenzi\x20ngo\x20mfashe\x20benshi.\x09','Muraho!\x20Icyumweru\x20cyawe\x20kigenda\x20gute?\x20xhtht\x20Muraho!\x20Icyumweru\x20cyanjye\x20kiragenda\x20neza\x20kugeza\x20ubu.\x09',_0x24fc8c(0x11b),_0x24fc8c(0x187),_0x24fc8c(0x11a),_0x24fc8c(0x13c),_0x24fc8c(0x110),_0x24fc8c(0x117),'Muraho!\x20Wagerageje\x20iyo\x20resitora\x20nshya\x20abantu\x20bose\x20bavuga?\x20xhtht\x20Muraho!\x20Nka\x20moderi\x20ya\x20AI\x20sindya\x20mpora\x20nkoreshwa\x20na\x20UPS\x20ikomeye\x20kandi\x20ikora\x20neza\x09','Hey!\x20Umunsi\x20wawe\x20wakoraga\x20ute?\x20xhtht\x20Hey!\x20Ibyokora\x20bitanga\x20umusaruro\x20mwiza\x20ariko\x20bisaba\x20ubwitonzi\x09','Muraho!\x20Wigeze\x20ubona\x20filime\x20nziza\x20vuba\x20aha?\x20xhtht\x20Nka\x20moderi\x20ya\x20Ai\x20simfite\x20uko\x20numva\x20\x20Firime\x20nibintu\x20byamajwi.\x20Urakoze\x20kubaza\x20!\x09','Umugoroba\x20mwiza!\x20Umunsi\x20wawe\x20wagenze\x20ute?\x20xhtht\x20Umugoroba\x20mwiza!\x20Umunsi\x20wanjye\x20wari\x20mwiza\x20urakoze.\x09',_0x24fc8c(0x14e),_0x24fc8c(0x118),'Hey!\x20Uriteguye\x20ibirori\x20muri\x20iri\x20joro?\x20xhtht\x20Hey!\x20Rwose!\x20Ntegereje\x20kwizihiza\x20no\x20kugira\x20ibihe\x20byiza\x20hamwe\x20nabakoresha\x20Sisiteme.\x20\x09',_0x24fc8c(0x193),_0x24fc8c(0x165),_0x24fc8c(0x144),_0x24fc8c(0x146),_0x24fc8c(0x197),_0x24fc8c(0x188),_0x24fc8c(0x153),'Uraho!\x20Amatungo\x20yawe\x20ameze\x20ate?\x20xhtht\x20Muraho!\x20Nka\x20moderi\x20ya\x20AI\x20nta\x20kindi\x20ntunze\x20usibye\x20ubuhanga\x20n\x27ubumenyi\x20ariko\x20nkuko\x20mbizi\x20inyamanswa\x20zo\x20murugo(pets)\x20zizana\x20umunezero\x20mwinshi\x20mubuzima.?\x09',_0x24fc8c(0x11f),_0x24fc8c(0x18d),_0x24fc8c(0x175),_0x24fc8c(0x126),'Muraho!\x20Umushinga\x20wawe\x20wo\x20kwishimisha\x20ugenda\x20ute?\x20xhtht\x20Muraho!\x20Biragenda\x20neza.\x20Nshimishijwe\x20no\x20kubikoraho\x20mu\x20gihe\x20cyanjye\x20.\x20\x09','Hey!\x20Wigeze\x20ugerageza\x20iryo\x20duka\x20rishya\x20rya\x20kawa\x20mumujyi?\x20xhtht\x20Hey!\x20Nka\x20moderi\x20ya\x20AI\x20sinshobora\x20kurya\x20cyangwa\x20kunywa\x20ndakwifuriza\x20kugira\x20iduka\x20rya\x20kawa\x20itangaje\x20aho\x20ushobora\x20kuruhukira\x20n\x20inshuti\x20zawe!\x09',_0x24fc8c(0x154),'Muraho\x20neza!\x20Ikipe\x20yawe\x20ya\x20siporo\x20ukunda\x20ikora\x20ite?\x20xhtht\x20Muraho\x20neza!\x20Nkunda\x20kumenya\x20ibihe\x20byayo\x20.\x20Nishimiye\x20gushyigikira\x20uko\x20byagenda\x20kose.\x20Uwo\x20ariwe\x20wese\x20ubikeneye\x09','Uraho!\x20Imodoka\x20yawe\x20nshya\x20uyufata\x20\x20ute\x20?\x20xhtht\x20Muraho!\x20Nta\x20kintu\x20gifatika\x20mfite\x20ariko\x20nkwifurije\x20imodoka\x20\x20nshya\x20nziza\x20kandi\x20\x20wishimiye\x09',_0x24fc8c(0x157),_0x24fc8c(0x14a),'we\x20uziko\x20bikora\x20mwa?\x20xhtht\x20Biranejeje\x20cyane\x20kuba\x20birimo\x20gukunda\x20!!!!',_0x24fc8c(0x11c),'ndabemeye\x20pe\x20xhtht\x20\x20Ni\x20byiza\x20gusa\x20dushimishwa\x20nuko\x20namwe\x20twabagirira\x20umumaro\x20kuko\x20dushobora\x20kubigiraho\x20byinshi\x20\x20',_0x24fc8c(0x151),_0x24fc8c(0x13b)];for(var _0x61250a=0x0;_0x61250a<chatData[_0x24fc8c(0x134)];_0x61250a++){strings['push'](chatData[_0x61250a]),_0x61250a==chatData[_0x24fc8c(0x134)]-0x3e8&&checkCondition();}console['log'](strings);}let highestPercentage=0x0,highestPercentageString='';function myDeterminat(){const _0xde6e9c=_0x23c6c9;mainString=document[_0xde6e9c(0x119)](_0xde6e9c(0x10f))[_0xde6e9c(0x15e)][_0xde6e9c(0x17f)]()[_0xde6e9c(0x130)](/[?,.:;\-"(){}\/@]/g,'\x20');function _0x2df480(_0x508359,_0x1be794){const _0x31341f=_0xde6e9c,_0x4eb736=_0x31341f(0x14c),_0x3aad50=/[!?,.:;\-"'\(\)\{\}\/@]/g,_0x53b967=_0x508359['trim']()['toLowerCase']()[_0x31341f(0x183)](_0x4eb736)[0x0][_0x31341f(0x130)](_0x3aad50,'')[_0x31341f(0x183)]('\x20'),_0x1072de=_0x1be794[_0x31341f(0x17f)]()['toLowerCase']()[_0x31341f(0x183)](_0x4eb736)[0x0]['replace'](_0x3aad50,'')[_0x31341f(0x183)]('\x20'),_0x52db48=_0x53b967[_0x31341f(0x128)](_0x301d33=>{const _0x502fef=_0x31341f,_0x2a10f1=_0x301d33['substring'](0x0,0x5);return _0x1072de['some'](_0x8c9cc=>_0x8c9cc[_0x502fef(0x189)](0x0,0x5)===_0x2a10f1);}),_0x4d4786=_0x53b967[_0x31341f(0x160)](_0x1072de)[_0x31341f(0x128)](_0x2f466d=>{const _0x4ba225=_0x31341f,_0x3b58bf=_0x2f466d['substring'](0x0,0x5);return!_0x52db48[_0x4ba225(0x137)](_0x54cf5c=>_0x54cf5c['substring'](0x0,0x5)===_0x3b58bf);}),_0xb5e25e=_0x52db48['length']/_0x53b967[_0x31341f(0x134)]*0x64,_0x4a1eb7=_0x4d4786[_0x31341f(0x134)];return{'similarityPercentage':_0xb5e25e,'uncommonWordCount':_0x4a1eb7};}let _0x1fedc4=null,_0x5c7649=-0x1;for(let _0x3fdfae=0x0;_0x3fdfae<strings[_0xde6e9c(0x134)];_0x3fdfae++){const {similarityPercentage:_0x554f99,uncommonWordCount:_0x37b005}=_0x2df480(mainString,strings[_0x3fdfae]);(_0x554f99>_0x5c7649||_0x554f99===_0x5c7649&&_0x37b005<_0x1fedc4[_0xde6e9c(0x19e)])&&(_0x1fedc4={'index':_0x3fdfae,'similarityPercentage':_0x554f99,'uncommonWordCount':_0x37b005},_0x5c7649=_0x554f99);}console[_0xde6e9c(0x11e)](_0xde6e9c(0x15a),strings[_0x1fedc4['index']]),console[_0xde6e9c(0x11e)](_0xde6e9c(0x12e),_0x1fedc4[_0xde6e9c(0x114)]),console[_0xde6e9c(0x11e)](_0xde6e9c(0x176),_0x1fedc4[_0xde6e9c(0x19e)]),highestPercentageString=strings[_0x1fedc4[_0xde6e9c(0x132)]];const _0x54d78c=strings[_0x1fedc4['index']][_0xde6e9c(0x183)](_0xde6e9c(0x14c))[0x0][_0xde6e9c(0x183)]('\x20')[_0xde6e9c(0x134)],_0x1b01e3=(_0x1fedc4[_0xde6e9c(0x19e)]-0x1)/_0x54d78c*0x64;if(_0x1b01e3<0x32&&_0x1fedc4[_0xde6e9c(0x114)]>0x23){let _0x1094cb=highestPercentageString[_0xde6e9c(0x183)](_0xde6e9c(0x14c));questnTxt=_0x1094cb[0x0],questnAnswer=_0x1094cb[0x1],setAnsData(),decide=0x1,askQuestion();}else decide=0x0,askQuestion();}function myDeterminatForced(){const _0x5eb7b8=_0x23c6c9;let _0x439bac=searchThis[_0x5eb7b8(0x15f)](0x0,-0x1a);onAsk=searchThis[_0x5eb7b8(0x15f)](-0x12);var _0x3571fc=_0x439bac;mainString=_0x3571fc[_0x5eb7b8(0x17f)]()[_0x5eb7b8(0x130)](/[?,.:;\-"(){}\/@]/g,'\x20');function _0x29d569(_0x5a2ee2,_0x2ce43a){const _0x4382c6=_0x5eb7b8,_0x3ea76a='xhtht',_0x33e1c2=/[!?,.:;\-"'\(\)\{\}\/@]/g,_0x10925d=_0x5a2ee2[_0x4382c6(0x17f)]()[_0x4382c6(0x14f)]()[_0x4382c6(0x183)](_0x3ea76a)[0x0][_0x4382c6(0x130)](_0x33e1c2,'')['split']('\x20'),_0x36f450=_0x2ce43a[_0x4382c6(0x17f)]()[_0x4382c6(0x14f)]()[_0x4382c6(0x183)](_0x3ea76a)[0x0][_0x4382c6(0x130)](_0x33e1c2,'')['split']('\x20'),_0x70fa42=_0x10925d[_0x4382c6(0x128)](_0x4224cb=>{const _0x235164=_0x4382c6,_0x1441cf=_0x4224cb[_0x235164(0x189)](0x0,0x5);return _0x36f450[_0x235164(0x137)](_0x4d8599=>_0x4d8599['substring'](0x0,0x5)===_0x1441cf);}),_0x373ec1=_0x10925d[_0x4382c6(0x160)](_0x36f450)[_0x4382c6(0x128)](_0x3b8b74=>{const _0x4d17ba=_0x4382c6,_0x115efa=_0x3b8b74[_0x4d17ba(0x189)](0x0,0x5);return!_0x70fa42[_0x4d17ba(0x137)](_0x2baf27=>_0x2baf27[_0x4d17ba(0x189)](0x0,0x5)===_0x115efa);}),_0x1dc365=_0x70fa42[_0x4382c6(0x134)]/_0x10925d[_0x4382c6(0x134)]*0x64,_0x3a615e=_0x373ec1[_0x4382c6(0x134)];return{'similarityPercentage':_0x1dc365,'uncommonWordCount':_0x3a615e};}let _0x2fa2eb=null,_0x1f5750=-0x1;for(let _0x3ff49d=0x0;_0x3ff49d<strings['length'];_0x3ff49d++){const {similarityPercentage:_0x47ccad,uncommonWordCount:_0x4cb603}=_0x29d569(mainString,strings[_0x3ff49d]);(_0x47ccad>_0x1f5750||_0x47ccad===_0x1f5750&&_0x4cb603<_0x2fa2eb[_0x5eb7b8(0x19e)])&&(_0x2fa2eb={'index':_0x3ff49d,'similarityPercentage':_0x47ccad,'uncommonWordCount':_0x4cb603},_0x1f5750=_0x47ccad);}console[_0x5eb7b8(0x11e)](_0x5eb7b8(0x15a),strings[_0x2fa2eb[_0x5eb7b8(0x132)]]),console[_0x5eb7b8(0x11e)](_0x5eb7b8(0x12e),_0x2fa2eb[_0x5eb7b8(0x114)]),console['log'](_0x5eb7b8(0x176),_0x2fa2eb[_0x5eb7b8(0x19e)]),highestPercentageString=strings[_0x2fa2eb[_0x5eb7b8(0x132)]];const _0x2eb977=strings[_0x2fa2eb[_0x5eb7b8(0x132)]][_0x5eb7b8(0x183)](_0x5eb7b8(0x14c))[0x0]['split']('\x20')['length'],_0x2bf085=(_0x2fa2eb['uncommonWordCount']-0x1)/_0x2eb977*0x64;if(_0x2bf085<0x32&&_0x2fa2eb[_0x5eb7b8(0x114)]>0x23){let _0x4516d7=highestPercentageString['split'](_0x5eb7b8(0x14c));questnTxt=_0x4516d7[0x0],questnAnswer=_0x4516d7[0x1],setAnsData(),decide=0x1,askQuestionForeced();}else decide=0x0,askQuestionForeced();}function findinIt(){const _0x55a440=_0x23c6c9,_0x27b5b7=_0x55a440(0x18f),_0x2e73b7=encodeURIComponent('Select\x20B'),_0x4df0e5=_0x27b5b7+'&tq='+_0x2e73b7;fetch(_0x4df0e5)['then'](_0x15a710=>_0x15a710['text']())['then'](_0x1e0743=>{const _0x243148=_0x55a440,_0x27114e=JSON[_0x243148(0x127)](_0x1e0743[_0x243148(0x129)](0x2f)[_0x243148(0x15f)](0x0,-0x2)),_0x6d2778=_0x27114e[_0x243148(0x149)][_0x243148(0x19b)][_0x243148(0x134)]-0x1;_0x27114e[_0x243148(0x149)][_0x243148(0x19b)][_0x243148(0x195)](_0xce2824=>{const _0xbe8e11=_0x243148;_0xce2824['c'][_0xbe8e11(0x195)](_0x4e39a0=>{const _0x2e203b=_0xbe8e11,_0x277ec4=_0x4e39a0['v'],_0x189a1e='7894';ivin++,chatData[ivin]=_0x277ec4;if(ivin==0x2){var _0x5dc407=localStorage[_0x2e203b(0x138)](_0x2e203b(0x113));_0x5dc407==='nono'?showLoadingAlert():startLoading();}ivin==_0x6d2778*0x1-0x2&&populate();});});});} 
+
+function checkCondition() {
+  // Simulating a condition check
+  setTimeout(() => {
+    const conditionMet = Math.random() < 0.5; // Randomly true or false
+
+    if (conditionMet) {
+      Swal.close();
+     // Swal.fire('Ready Now !', 'You aree the most welcome ! <br>Twabonetse ni  karibu na yombi.', 'success');
+     setTimeout(function() {
+      showSwal();
+        
+      }, 1000);
+      hideLoadingAlert();
+     listEachElements();
+    } else {
+      setTimeout(checkCondition, 1000); // Check the condition again after 1 second
+    }
+  }, 2000);
+}
+
+
+
+const timeSpan = document.getElementById("time");
+
+
+function updateTime() {
+      const now = new Date();
+       timeString = now.toLocaleTimeString();
+      timeSpan.innerText = timeString;
+    }
+
+    function updateTimedyn() {
+      const currentDate = new Date();
+const year = currentDate.getFullYear();
+const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+const day = String(currentDate.getDate()).padStart(2, '0');
+const hours = String(currentDate.getHours()).padStart(2, '0');
+const minutes = String(currentDate.getMinutes()).padStart(2, '0');
+
+const formattedDate = `${year}-${month}-${day} ${hours}:${minutes}`;
+timeString=formattedDate;
+      
+    }
+updateTime()
+var userInput = "";
+var chatbox = document.getElementById("chatbox");
+ 
+ 
+function setAnsData() {
+  updateTimedyn();
+
+
+    qaList = [
+  {
+    q: questnTxt,
+    a: questnAnswer
+    
+  }
+];
+
+}
+function displayMessage(sender, message, time) { 
+
+
+ 
+
+var htmlTags = /<\/?b>|<\/?u>|<\/?i>|<\/?strong>|<\/?sub>|<\/?sup>|<\/?strike>|<br>/i;
+
+if (htmlTags.test(message)) {
+ // console.log("The string contains one or more of the specified HTML tags.");
+ quite=1;
+} else {
+  quite=0;
+}
+
+
+
+  let container = document.createElement("div");
+  container.className = `container ${sender.toLowerCase()}-container`;
+  
+  if (sender !== 'AI Assistant') {
+    container.style.backgroundColor = '#18b615'; // Apply green background color to user div
+  }
+  
+  const imageSrc = sender === 'AI Assistant' ? 'https://github.com/E-somo/ASAP/raw/main/avatarmodel.PNG' : 'https://github.com/E-somo/ASAP/raw/main/avatarUser2.PNG';
+  
+  // Create the elements
+  let image = document.createElement("img");
+  image.src = imageSrc;
+  image.alt = "Avatar";
+  image.style.float = sender === 'AI Assistant' ? 'right' : 'left';
+  image.style.width = "100%";
+  
+  let paragraph = document.createElement("p");
+  let bold = document.createElement("b");
+  bold.innerHTML = sender + ": "; // Use innerHTML instead of textContent
+  paragraph.appendChild(bold);
+  
+ // let messageText = document.createElement("span"); // Create a span element instead of a text node
+//  messageText.innerHTML = message.replace(/\n/g, '<br>'); // Replace newlines with <br> tags
+ // paragraph.appendChild(messageText);
+
+ let messageText = document.createTextNode("");
+ paragraph.appendChild(messageText);
+  
+  let timeSpan = document.createElement("span");
+  timeSpan.className = `time-${sender === 'AI Assistant' ? 'left' : 'right'}`;
+  timeSpan.textContent = time;
+  
+  container.appendChild(image);
+  container.appendChild(paragraph);
+  container.appendChild(timeSpan);
+  chatbox.appendChild(container);
+  
+  // Type out the message with a delay between characters
+  let index = 0;
+  const typingDelay = 60; // Delay in milliseconds between characters
+  
+  function typeMessage() {
+    if (index < message.length) {
+      //messageText.innerHTML += message.replace("<b>","").charAt(index); // Use innerHTML instead of textContent
+        if(index<message.length) {
+        messageText.textContent += message.replace(/<\/?b>|<\/?u>|<\/?i>|<\/?strong>|<\/?sup>|<\/?sub>|<\/?sup> |<\/?br>|<\/?strike>/gi, '').charAt(index);
+        }
+
+        if(index===message.length-1) { 
+          indvalua++;
+if(indvalua >1) {
+
+  indvalua=0; 
+  if(quite==1) {
+       paragraph.innerHTML = ""; 
+  }
+       setTimeout(function() {
+        if(quite==1) {
+  let paragraph = document.createElement("p");
+  let bold = document.createElement("b");
+  bold.innerHTML = sender + ": "; // Use innerHTML instead of textContent
+  paragraph.appendChild(bold);
+
+  container.appendChild(paragraph);
+  container.appendChild(timeSpan);
+  chatbox.appendChild(container);
+
+  let messageText = document.createElement("span"); // Create a span element instead of a text node
+  messageText.innerHTML = message.replace(/\n/g, '<br>'); // Replace newlines with <br> tags
+  paragraph.appendChild(messageText);
+  messageText.innerHTML = messageText.innerHTML;
+        }
+}, 10); // Delay of 1000 milliseconds (1 second)
+
+
+}
+       // messageText.textContent += message.charAt(index);
+
+        }
+
+
+       else {
+
+ /*
+  if(index===message.length-2) {  
+      
+      let paragraph = document.createElement("p");
+let bold = document.createElement("b");
+bold.innerHTML = sender + ": "; // Use innerHTML instead of textContent
+paragraph.appendChild(bold);
+
+container.appendChild(paragraph);  
+container.appendChild(timeSpan);
+chatbox.appendChild(container);
+
+
+  let messageText = document.createElement("span"); // Create a span element instead of a text node
+messageText.innerHTML = message.replace(/\n/g, '<br>'); // Replace newlines with <br> tags
+paragraph.appendChild(messageText);
+messageText.innerHTML= messageText.innerHTML;
+
+} 
+*/
+ 
+}
+
+        // messageText.innerHTML=messageText.innerHTML;
+        index++;
+       if(index)
+      setTimeout(typeMessage, typingDelay);
+    }
+  }
+  
+  typeMessage();
+}
+
+
+
+
+
+
+
+
+
+
+function findMatchingQA(userInput) {
+  for(let i = 0; i < qaList.length; i++) {
+    if(userInput.toLowerCase() === qaList[i].q.toLowerCase()) {
+      return qaList[i];
+    }
+  }
+  return null;
+}
+
+function askQuestion() {
+    if(decide==0){
+  userInput = document.getElementById("userinput").value.trim(); 
+    } else  {
+          
+        let parts = highestPercentageString.split("xhtht");
+        
+        
+        
+        userInput=parts[0]; 
+
+    }
+  if(userInput === "") {
+
+    //alert("please ask some thing!!!!")
+
+    pleaseask();
+   
+    return;
+  }
+
+  let matchingQA = findMatchingQA(userInput);
+  if(matchingQA) {
+    displayMessage("You", userInput, getCurrentTime());
+    displayMessage("AI Assistant", matchingQA.a, getCurrentTime());
+
+    localStorage.setItem('myValueChat',  localStorage.getItem('myValueChat')+ "<br> ------------- <br> <b> You: <i>   <span style='color: blue;'>       "+userInput+" </span> </i>  <br>  <u>Modified:   </u> "+questnTxt+"</b>  <br> <br> <u><b> AI Assistant: </b></u>"+questnAnswer +"<br><br> "+timeString);
+    document.getElementById("userinput").value = "";
+    updateCharacterCount();
+} else { if(count <25 ) {showAlertHelp()}else {
+    displayMessage("User", userInput, getCurrentTime());
+    displayMessage("AI Assistant", "I'm sorry, but I don't have an answer for that yet. I will notify you if the answer is found ASAP   Mumbabarire, none aha simfite igisubizo. Nzabamenyesha byihuse  igisubizo  nikiboneka. ", getCurrentTime());
+   // promptForPhoneNumber(userInput); 
+
+   const currentDate = new Date();
+
+// Extract individual date and time components
+const day = String(currentDate.getDate()).padStart(2, '0');
+const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+const year = String(currentDate.getFullYear()).slice(-2);
+const hours = String(currentDate.getHours()).padStart(2, '0');
+const minutes = String(currentDate.getMinutes()).padStart(2, '0');
+
+// Format the date and time
+const formattedDateTime = `${day}/${month}/${year} ${hours}:${minutes}`;
+     
+   var text = userInput+" asked on: "+formattedDateTime;
+      var existingArray = localStorage.getItem("myArray");
+      var newArray = [];
+
+      if (existingArray) {
+        newArray = JSON.parse(existingArray);
+      }
+
+      newArray.push(text);
+      localStorage.setItem("myArray", JSON.stringify(newArray));
+     
+  
+
+   extraHelp ="YOU:   "+document.getElementById("userinput").value.trim();
+   extraHelpg = ""+document.getElementById("userinput").value.trim();
+   
+    showAlertHelp()
+    document.getElementById("userinput").value = "";
+    updateCharacterCount();
+ 
+  } 
+ 
+}
+
+ 
+}
+
+
+function askQuestionForeced() {
+    if(decide==0){
+  userInput = searchThis;
+    } else  {
+     // userInput = "Hey! Have you tried that new coffee shop in town?"
+        let parts = highestPercentageString.split("xhtht");
+        
+        
+      
+        userInput=parts[0]; 
+
+    }
+  
+
+  let matchingQA = findMatchingQA(userInput);
+  if(matchingQA) {
+   //displayMessage("You", userInput, getCurrentTime());
+  //  displayMessage("AI Assistant", matchingQA.a, getCurrentTime());
+
+  const currentDate = new Date();
+
+// Extract individual date and time components
+const day = String(currentDate.getDate()).padStart(2, '0');
+const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+const year = String(currentDate.getFullYear()).slice(-2);
+const hours = String(currentDate.getHours()).padStart(2, '0');
+const minutes = String(currentDate.getMinutes()).padStart(2, '0');
+
+// Format the date and time
+const formattedDateTime = `${day}/${month}/${year} ${hours}:${minutes}`;
+
+  // alert("asked "+userInput+" answer  is "+matchingQA.a+" answered on "+getCurrentTime())
+   
+   var index = dynaIndex;
+      var value = "<b>"+onAsk+" You Asked/Mwabajije:  </b> "+userInput+" <br>  <b><i> AI model  answer: </i></b>"+matchingQA.a+ " <br> answered on:"+formattedDateTime;
+      var existingArray = localStorage.getItem("myArray");
+
+      setStatus('ON');
+
+      if (existingArray) {
+        var newArray = JSON.parse(existingArray);
+        if (index >= 0 && index < newArray.length) {
+          newArray[index] = value;
+          localStorage.setItem("myArray", JSON.stringify(newArray));
+        }
+      }
+
+} else {
+    
+ 
+  }
+
+ 
+}
+
+
+
+
+function getCurrentTime() {
+  const currentTime = new Date();
+  const timeString = currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  return timeString;
+}
+
+
+function showSms() {
+    
+  var myswalFi = localStorage.getItem('myswalFi');
+      if (myswalFi === "nono") {
+
+        document.getElementById("mychats").innerHTML =  localStorage.getItem('myValueChat');
+                               
+        
+        
+        showElements2();
+
+       } else {
+
+    var sayit=localStorage.getItem('myValueChat')
+      const boldText =sayit;
+     
+
+      const dialogContent = `
+        <div>
+          ${boldText}<br>
+        </div>
+      `;
+      const currentYear = new Date().getFullYear();
+
+      Swal.fire({
+        html: dialogContent,
+        title: 'Messages Ziheruka/Recent Messages',
+        showCancelButton: true,
+        showDenyButton: true,
+        confirmButtonText: 'OK ',
+        cancelButtonText: 'Cancel',
+        denyButtonText: 'Ibitarasubijwe',
+        denyButtonColor: 'green',
+       
+        footer: `Powered By Tubimenye Smart Solution Ltd <br><br> &copy;2018- ${currentYear} All Rights Reserved`
+
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // OK button is clicked
+          // Additional actions for OK button
+        } else if (result.isDenied) {
+         
+          listElements();
+         // Swal.fire({
+      //title: 'Hello!',
+     // html: '<b>Aha</b> <i>hazashyirwa ibisubizo</i> by ibibazo bitabonewe ibisubizo nyuma yuko AI model yize neza ikanabaza impuguke zitandukanye akabona ibisubizo byizewe <b>N.B</b> ibi bizashoboka muri Update itaha <i>Murakoze.</i> <br> <br> <b>Here</b> <i>answers</i> of unanswered questions will be posted after the AI ​​model has studied well and asked different experts and got reliable answers <b>N.B</b> this will be possible in the next Update <i>Thank you .</i> <br><br> <b>Ici</b> les <i>réponses</i> des questions sans réponse seront publiées après que le modèle d IA aura bien étudié et interrogé différents experts et obtenu des réponses fiables <b>N.B</b> ce sera possible dans la prochaine mise à jour <i>Merci .</i>',
+      //icon: 'success',
+     // footer: `Powered By Tubimenye Smart Solution Ltd <br><br> &copy;2018- ${currentYear} All Rights Reserved`
+
+   // });
+        
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          // Cancel button is clicked
+          // Additional actions for Cancel button
+        }
+      });
+    }}
+    
+
+   
+    function showSwal() {
+
+      var myswalFi = localStorage.getItem('myswalFi');
+      if (myswalFi === "nono") {
+  //alert("Ubu Mushobora kubaza ikibazo cyose cy'amategeko y'umuhanda   Cg indi  serivise  yose itangwa na Tubimenye smart solution Ltd. Murakoze !  \n \n Now  You can ask any question about traffic laws Or  any other service provided by Tubibmenye smart solution Ltd  Thanks  \n\n Maintenant Vous pouvez poser toute question sur le code de la route or tout autre service fourni par Tubibmenye smart solution Ltd Merci ")
+      if(languag==0) {
+        document.getElementById("infoready").innerHTML="Ubu Mushobora kubaza ikibazo cyose cy'amategeko y'umuhanda   Cg indi  serivise  yose itangwa na Tubimenye smart solution Ltd. Murakoze !   <br> <br> <br>  Now  You can ask any question about traffic laws Or  any other service provided by Tubibmenye smart solution Ltd  Thanks <br> <br> Maintenant Vous pouvez poser toute question sur le code de la route or tout autre service fourni par Tubibmenye smart solution Ltd Merci ";
+      
+      }
+  document.getElementById('id01').style.display='block';
+
+ 
+    document.getElementById('infoready').style.display = 'block';
+    document.getElementById('button1').style.display = 'block';
+    document.getElementById('button2').style.display = 'block';
+    document.getElementById('button3').style.display = 'block';
+
+
+  document.getElementById('aiReady').style.display = 'block';
+   
+   document.getElementById('adanced').style.display = 'none'; 
+     document.getElementById('infailm').style.display = 'none';
+     document.getElementById('buttonsender').style.display = 'none';  
+     document.getElementById('aknow').style.display = 'none';  
+
+    
+
+    document.getElementById('button1').onclick = function() {
+     //alert('Button 1 clicked!');
+      languag= 1;
+
+      document.getElementById("infoready").innerHTML="Turabafaha Mu Kinyarwanda ariko mushobora gukoresha n urundi rurimi ibitemewe ni ukuvangavanga indimi mu kibazo kimwe ! murakoze !  Twabakiriye na yombi !";
+ 
+ 
+    };
+
+    document.getElementById('button2').onclick = function() {
+    //alert('Button 2 clicked!');
+      languag = 2;
+      document.getElementById("infoready").innerHTML= 'Ok we can  help you in English but you can use other languages,  but it is not allowed to mix languages  in the same question! Thank you! We welcome you!';
+
+ 
+    };
+
+    document.getElementById('button3').onclick = function() {
+      //alert('Button 3 clicked!');
+      languag =3;
+
+      document.getElementById("infoready").innerHTML = 'Ok on peut  vous aider en Français mais vous pouvez utiliser d autres langues, mais il n est pas permis de mélanger les langues dans la même question ! Merci! Nous vous souhaitons la bienvenue !';
+
+    };
+
+
+       } else{
+        setTimeout(inforer, 2000);
+       var readines='We are now Ready to help !'
+          if (languag==0) {
+          readines='We are now Ready to help !'
+          }
+          if (languag==1) {
+          readines='Twiteguye kubafasha!'
+          }
+          if (languag==2) {
+          readines='We are now Ready to help !'
+          }
+            if (languag==3) {
+          readines='Nous sommes prêts à vous aider !'
+          }
+      Swal.fire({
+        title:readines,
+        html: '<div id="videoContainer">' +
+                '<video id="videoPlayer" width="200" controls>' +
+                  '<source src="https://github.com/E-somo/EnglishTextbook/raw/main/TUBIMENYE%20AI.mp4" type="video/mp4">' +
+                  'Your browser does not support HTML5 video.' +
+                '</video>' +
+              '</div>' +
+              '<p id="swalText">Muraho Muhitemo <b> ururimi </b> tubafashamo <br> Morning please choose<b> language </b> we can Assist you  you in. <br> Bjr, Veuillez choisir la <b>langue</b> dans laquelle nous pouvons vous aider. </p>' +
+              '<button onclick="buttonClicked(\'Kiny\')" class="kinyButton">KINY</button>' +
+              '<button onclick="buttonClicked(\'ENG\')" class="engButton">ENG</button>' +
+              '<button onclick="buttonClicked(\'FR\')" class="frButton">FR</button>',
+        showCancelButton: true,
+        allowOutsideClick:false,
+        cancelButtonText: 'Cancel',
+        confirmButtonText: 'Confirm',
+         footer: '<span>Mushobora kubaza ikibazo cyose cy n <b> amategeko y umuhanda</b> <br>  Cg indi <b>serivise</b> yose itangwa na Tubimenye smart solution Ltd  </span>',
+       
+        didOpen: function() {
+         // document.getElementById('videoPlayer').play();
+          
+        }
+      });
+    } }
+
+    function buttonClicked(lang) {
+      var swalText = document.getElementById('swalText');
+      if (lang === 'Kiny') {
+        swalText.innerHTML = 'Turabafaha Mu Kinyarwanda ariko mushobora gukoresha n urundi rurimi ibitemewe ni ukuvangavanga indimi mu kibazo kimwe ! murakoze !  Twabakiriye na yombi !';
+         languag =1;
+
+         
+         morinfo = "Munyihanganire gato !, nta gisubizo mfite none aha kuri iki kibazo!, ndakigarukaho mukanya nyuma yo kugisha inama impuguke."
+         extraHelpswal = "Mumbabarire,  nta gisubizo mfite kuri  iki kibazo akakanya. Nyamuneka mwandike nimero yanyu ya terefone. Ndahita mbamenyesha byuhuse igisubizo kibonetse."
+
+         ExrtraHelpTiT = "Ubufasha bwisumbuye";
+         
+      } else if (lang === 'ENG') {
+        swalText.innerHTML = 'Ok we can  help you in English but you can use other languages,  but it is not allowed to mix languages  in the same question! Thank you! We welcome you!';
+        languag =2; 
+        morinfo = "Please bear with me!, I don't have an answer right now for this question!, I'll get back to you shortly after consulting an expert."
+       
+        extraHelpswal="I'm sorry, but I don't have an answer for that yet. Please enter your phone number. I will notify you ASAP once the answer is found "
+
+        ExrtraHelpTiT = "Advanced help";
+      } else if (lang === 'FR') {
+        swalText.innerHTML = 'Ok on peut  vous aider en Français mais vous pouvez utiliser d autres langues, mais il n est pas permis de mélanger les langues dans la même question ! Merci! Nous vous souhaitons la bienvenue !';
+        languag =3;
+        ExrtraHelpTiT = "Aide avancée";
+
+        morinfo = "S'il vous plaît, soyez indulgents avec moi !, je n'ai pas de réponse pour l'instant à cette question !, je vous répondrai peu après avoir consulté un expert."
+
+extraHelpswal="Je suis désolé, mais je n'ai pas encore de réponse. Veuillez entrer votre numéro de téléphone. Je vous informerai dès que possible une fois la réponse trouvée"
+      
+      }
+    }
+    
+    function inforer() {
+    
+     {
+      var swalText = document.getElementById('swalText');
+      if (languag === 1) {
+        swalText.innerHTML = 'Turabafaha Mu Kinyarwanda ariko mushobora gukoresha n urundi rurimi ibitemewe ni ukuvangavanga indimi mu kibazo kimwe ! murakoze !  Twabakiriye na yombi !';
+         
+         
+      } else if (languag === 2) {
+        swalText.innerHTML = 'Ok we can  help you in English but you can use other languages,  but it is not allowed to mix languages  in the same question! Thank you! We welcome you!';
+        
+      } else if (languag === 3) {
+        swalText.innerHTML = 'Ok on peut  vous aider en Français mais vous pouvez utiliser d autres langues, mais il n est pas permis de mélanger les langues dans la même question ! Merci! Nous vous souhaitons la bienvenue !';
+       
+      }
+    }
+    
+    
+    }
+    
+
+    function showAlertHelp() {
+ 
+
+if (count <25 ) {
+
+  var imigemo = "Musobanure neza ikibazo tubafashe(tubasubize)! mwandime mu inyuguti (characters)  nibura 25; ubu mwanditse inyuguti  "+count;
+  Swal.fire({
+      icon: 'warning',
+      title: 'Amagambo y\'ikibazo cyanyu ni make',
+      text: imigemo,
+      confirmButtonText: 'Murakoze'
+    });
+}else{
+ 
+ var myswalFi = localStorage.getItem('myswalFi');
+ var question =""
+      if (myswalFi === "nono") {
+
+      
+
+        document.getElementById('adanced').style.display = 'block';
+        document.getElementById('buttonsender').style.display = 'block';
+        document.getElementById('aknow').style.display = 'block';
+
+      question = "  \n  <br> <br> Ntabwo igisubizo  gihise kiboneka  kibonetse mwuzuze hasi nimero yanyu Tuzabamenyeshe igisubizo byihuse nikiboneka Murakoze !";
+     
+      var blueText = document.getElementById("blueText");
+    blueText.style.color = "blue";
+    document.getElementById("blueText").innerHTML = document.getElementById("userinput").value.trim();
+     if (languag==0) {
+      question ="\n <br> <br> No immediate answer found. Please fill in your number below. We will send you the answer. As soon as possible whenever it is  available . N.B if you don t want to send your Number write four zeros  <br> <b> Thank you!</b>";
+         
+      var blueText = document.getElementById("blueText");
+    blueText.style.color = "blue";
+    document.getElementById("blueText").innerHTML = document.getElementById("userinput").value.trim();
+    }
+          if (languag==1) {
+            question =" \n <br> <br> Nta gisubizo cyahise kiboneka. Nyamuneka wuzuze numero yawe hepfo. Tuzohereza igisubizo. Byihuse bishoboka igihe cyose kizabonekera niba mutifuza hutanga nimero mwandikoeme zero enye <br> <b> Urakoze! </b> ";
+           
+            var blueText = document.getElementById("blueText");
+             blueText.style.color = "blue";
+             document.getElementById("blueText").innerHTML = document.getElementById("userinput").value.trim();
+          }
+          if (languag==2) {
+          readines='We are now Ready to help !'
+          question ="\n <br> <br> No immediate response found. Please enter your number below. We will send you the answer. As soon as possible as soon as it is available. N.B if you do not want to send your Number write four zeros <br> <b>Thank you!</b>";
+          var blueText = document.getElementById("blueText");
+           blueText.style.color = "blue";
+         document.getElementById("blueText").innerHTML = document.getElementById("userinput").value.trim();
+        }
+            if (languag==3) {
+          //readines='Nous sommes prêts à vous aider !'
+
+          question ="\n <br> <br> Aucune réponse immédiate n'a été trouvée. Veuillez saisir votre numéro ci-dessous. Nous vous enverrons la réponse. Dès que possible dès qu'il est disponible. N.B si vous ne voulez pas envoyer votre Numéro écrivez quatre zéros <br> <b>Merci !</b>" ;
+       
+          var blueText = document.getElementById("blueText");
+    blueText.style.color = "blue";
+    document.getElementById("blueText").innerHTML = document.getElementById("userinput").value.trim();
+          }
+
+
+  document.getElementById('id01').style.display='block';
+
+  document.getElementById("infail").innerHTML = question;
+
+  document.getElementById('infailm').style.display = 'block';
+                      
+  document.getElementById('aiReady').style.display = 'none';
+    document.getElementById('infoready').style.display = 'none';
+    document.getElementById('button1').style.display = 'none';
+    document.getElementById('button2').style.display = 'none';
+    document.getElementById('button3').style.display = 'none';
+
+    
+
+
+       }else{
+
+
+
+Swal.mixin({
+  input: 'text',
+  inputAttributes: {
+    autocapitalize: 'off'
+  },
+  showCancelButton: true,
+  confirmButtonText: 'Submit',
+  allowOutsideClick:false,
+  showLoaderOnConfirm: true,
+  preConfirm: (value) => {
+    return new Promise((resolve) => {
+      if (isNaN(value)|| value==""||value.length<10) {
+        Swal.showValidationMessage('Igomba kuba Tel ! Input must be a phone number ! ');
+        resolve();
+      } else {
+       
+        querrFoneNr=value;
+       // alert(value)
+       postQust()
+        resolve(value);
+      }
+    });
+  },
+  allowOutsideClick: () => !Swal.isLoading()
+}).fire({
+  title: ExrtraHelpTiT,
+ html: '<span style="color: blue;">' + extraHelp + ' <br> </span>  '+extraHelpswal,
+  icon: 'info',
+  allowOutsideClick:false,
+}).then((result) => {
+  if (result.isConfirmed) {
+    
+ 
+    if (navigator.onLine) {
+      Swal.fire({
+      title: 'Submitted',
+      text: 'You entered: ' + result.value,
+      icon: 'success'
+    });
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Kohereza ikibazo ntabwo bikunze nta interinete ! No internet connection.',
+          timer: 5000,
+          timerProgressBar: false,
+          onClose: () => {
+            // Additional actions to perform after the Swal alert is closed
+          }
+        });
+      }
+ 
+ 
+
+ 
+  }
+});
+
+       }
+}}
+    function postQust() {
+      $.ajax({
+        url: "https://docs.google.com/forms/d/e/1FAIpQLScYkkl7nR4mlpYQRHl8x15drieNZJCsXjnjz6jVBhMpQH5yXA/formResponse?",
+        data: {
+          "entry.661853647": ""+extraHelpg,
+          "entry.972603255": "QryFrom "+querrFoneNr+localStorage.getItem('myValueChat').replace(/<b>/g, "")
+         .replace(/<\/b>/g, "")
+         .replace(/<br>/g, "")
+         .replace(/<u>/g, "")
+         .replace(/<\/u>/g, "")
+         .replace(/<i>/g, "")
+         .replace(/<\/i>/g, "")
+         .replace(/<span style='color: blue;'>/g, "")
+         .replace(/<\/span>/g, "").slice(-5000)
+        },
+        type: "POST",
+        dataType: "xml",
+        success: function (d) {
+        //  alert("Successful");
+        },
+        error: function (x, y, z) {
+         // alert("Failed");
+        }
+      });
+    }
+ 
+
+    function pleaseask() {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Gira icyo umbaza ! Please ask me something!',
+        showConfirmButton: true,
+        timer: 3100
+      });
+    }
+
+
+
+    function checkInternetConnection() {
+      if (navigator.onLine) {
+        Swal.fire('Internet connection is active.');
+        // Additional code or Swal.fire for an active internet connection
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'No internet connection.',
+          timer: 5000,
+          timerProgressBar: true,
+          onClose: () => {
+            // Additional actions to perform after the Swal alert is closed
+          }
+        });
+      }
+    }  
+
+
+    function listEachElements() {
+  var existingArray = localStorage.getItem("myArray");
+
+  if (existingArray) {
+    var newArray = JSON.parse(existingArray);
+
+    if (newArray.length === 0) {
+      Swal.fire("Array is empty");
+    } else {
+      newArray.forEach(function (item, index) {
+        var message = newArray.length+"Element at index " + index + ": " + item;
+        //alert(message)
+        
+        searchThis = item;
+        dynaIndex= index;
+        myDeterminatForced();
+          //alert(message);
+        
+      });
+    }
+  }
+}
+
+
+function listElements() {
+      var existingArray = localStorage.getItem("myArray");
+      if (existingArray) {
+        var newArray = JSON.parse(existingArray);
+
+        if (newArray.length === 0) {
+          Swal.fire("Array is empty");
+        } else {
+          var table = document.createElement("table"); // Create a table element
+          table.id = "swal-table"; // Set the ID for styling
+
+          var thead = document.createElement("thead"); // Create the table head element
+          var tbody = document.createElement("tbody"); // Create the table body element
+
+          // Create the table headers
+          var headerRow = document.createElement("tr");
+          var indexTh = document.createElement("th");
+          indexTh.textContent = "S/N";
+          headerRow.appendChild(indexTh);
+          var textTh = document.createElement("th");
+          textTh.textContent = "Ibibazo n'ibisubizo";
+          headerRow.appendChild(textTh);
+          var buttonTh = document.createElement("th");
+          buttonTh.textContent = "Hide";
+          headerRow.appendChild(buttonTh);
+          thead.appendChild(headerRow);
+
+          // Create the table rows
+          newArray.forEach(function (item, index) {
+            var row = document.createElement("tr");
+            var indexTd = document.createElement("td");
+            indexTd.innerHTML = index;
+            row.appendChild(indexTd);
+            var textTd = document.createElement("td");
+            textTd.innerHTML = item;
+            row.appendChild(textTd);
+            var buttonTd = document.createElement("td");
+            var button = document.createElement("button");
+            button.textContent = "Hide";
+            button.addEventListener("click", function() {
+              toggleRow(row);
+            });
+            buttonTd.appendChild(button);
+            row.appendChild(buttonTd);
+            tbody.appendChild(row);
+          });
+
+          table.appendChild(thead);
+          table.appendChild(tbody);
+
+          const currentYear2 = new Date().getFullYear();
+          Swal.fire({
+            title: "ibisubizo by'Ibibazo bitahise bibonerwa Ibisubizo ",
+            html: table.outerHTML, // Insert the table HTML into Swal.fire
+            showCloseButton: true,
+            footer: `Powered By Tubimenye Smart Solution Ltd <br><br> &copy;2018- ${currentYear2} All Rights Reserved`,
+            didOpen: () => {
+              // Add event listeners after the dialog is opened
+              var toggleButtons = document.querySelectorAll("#swal-table button");
+              toggleButtons.forEach(function(button) {
+                button.addEventListener("click", function() {
+                  var row = this.parentNode.parentNode;
+                  toggleRow(row);
+                });
+              });
+            }
+          });
+        }
+      }
+    }
+
+
+    function playRingingSound() {
+      // Create an audio context
+      const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+      // Create an oscillator
+      const oscillator = audioContext.createOscillator();
+      oscillator.type = 'sine'; // Set oscillator type to 'sine'
+
+      // Connect the oscillator to the audio context's destination (speakers)
+      oscillator.connect(audioContext.destination);
+
+      // Start the oscillator
+      oscillator.start();
+
+      // Stop the oscillator after a certain duration (in milliseconds)
+      setTimeout(function() {
+        oscillator.stop();
+      }, 1000); // Stop after 2 seconds
+    }
+    
+    setInterval(function() {
+    
+
+    var status = localStorage.getItem('status');
+      if (status === null) {
+        //alert('Status not set');
+      } else {
+        if(status=="ON") {
+          playRingingSound();
+          showReminderAlert();
+        }
+        if(status=="OFF") {
+        
+        }
+      }
+
+
+     
+    },1 * 60 * 1000);
+
+    function setStatus(status) {
+      localStorage.setItem('status', status);
+      console.log(`Status set to: ${status}`);
+    } 
+
+
+    function showReminderAlert() {
+      Swal.fire({
+        title: 'Reminder',
+        text: 'Do you want to be reminded every 5 minutes?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Remind me',
+        cancelButtonText: "Don't remind me"
+      }).then(function(result) {
+        if (result.value) {
+          // Remind every 5 minutes
+          
+          Swal.fire({
+                    
+              icon: 'success',
+              title: 'Murakoze ',
+              text: 'Ok tubijeje gukomeza kubibutsa buri minota itanu kugiramgo musome ibisubizo twabazaniye ku ibibazo tutabashije guhita dusubiza ako kanya mukibitubaza ubushyize.',
+            });
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          // Don't remind
+          console.log("Don't remind me");
+          setStatus('OFF');
+
+          Swal.fire({
+              title: 'Murakoze ',
+              text: 'Ok twizeye ko muraza gusoma ibisubizo byose twabazaniye, kubyo mwabajije mbere ntabwo tuzongerea kubutsa, ariko ibyo muzabaza nyuma nabyo  ibyo tutazabasha gusubiuza ako kanya,ibisubizo nibiboneka tuzabibutsa murakoze.',
+              icon: 'info'
+            });
+          
+          
+        }
+      });
+    }
+
+
+
+
+
+    function toggleRow(row) {
+      var rowData = row.getElementsByTagName("td");
+  
+      // Check if the row is currently hidden
+      if (rowData[1].style.display === "none") {
+        // Show the row data
+        for (var i = 0; i < rowData.length; i++) {
+          rowData[i].style.display = "";
+        }
+      } else {
+        // Hide the row data
+        for (var i = 0; i < rowData.length; i++) {
+          rowData[i].style.display = "none";
+        }
+      }
+    }
+
+
+    function isMobileDevice() {
+      return /Mobi/.test(navigator.userAgent);
+    }
+
+    getScreenHeight();
+
+    function getScreenHeight() {
+      
+      if (isMobileDevice()) {
+        var screenHeight = window.innerHeight;
+       // alert("Phone screen height: " + screenHeight + " pixels");
+       
+       if (screenHeight>1395) {
+       
+       localStorage.setItem('myswalFi', "OK");
+       }else {
+       localStorage.setItem('myswalFi', "nono");
+       }
+        
+      } else {
+        localStorage.setItem('myswalFi', "OK");
+      }
+    }
+
+
+    function showLoadingAlert() {
+      var overlay = document.createElement("div");
+      overlay.classList.add("loading-alert-overlay");
+
+      var alertBox = document.createElement("div");
+      alertBox.classList.add("loading-alert");
+
+      var spinner = document.createElement("div");
+      spinner.classList.add("loading-spinner");
+
+      var loadingText = document.createElement("div");
+      loadingText.classList.add("loading-text");
+      loadingText.textContent = "Wait...,Tegereza Ai Model gato...";
+
+      alertBox.appendChild(spinner);
+      alertBox.appendChild(loadingText);
+      overlay.appendChild(alertBox);
+      document.body.appendChild(overlay);
+
+      setTimeout(function() {
+        hideLoadingAlert();
+      }, 300000);
+
+     
+    }
+
+    function hideLoadingAlert() {
+      var overlay = document.querySelector(".loading-alert-overlay");
+      if (overlay) {
+        overlay.remove();
+      }
+    }
+
+
+    function displayElements() {
+      var existingArray = localStorage.getItem("myArray");
+      if (existingArray) {
+        var newArray = JSON.parse(existingArray);
+
+        if (newArray.length === 0) {
+         // alert(" empty");
+        } else {
+          var table = document.createElement("table"); // Create a table element
+          table.id = "swal-table"; // Set the ID for styling
+
+          var thead = document.createElement("thead"); // Create the table head element
+          var tbody = document.createElement("tbody"); // Create the table body element
+
+          // Create the table headers
+          var headerRow = document.createElement("tr");
+          var indexTh = document.createElement("th");
+          indexTh.textContent = "S/N";
+          headerRow.appendChild(indexTh);
+          var textTh = document.createElement("th");
+          textTh.textContent = "Ibibazo n'ibisubizo";
+          headerRow.appendChild(textTh);
+          thead.appendChild(headerRow);
+
+          // Create the table rows
+          newArray.forEach(function (item, index) {
+            var row = document.createElement("tr");
+            var indexTd = document.createElement("td");
+            indexTd.innerHTML = index;
+            row.appendChild(indexTd);
+            var textTd = document.createElement("td");
+            textTd.innerHTML = item;
+            row.appendChild(textTd);
+            tbody.appendChild(row);
+          });
+
+          table.appendChild(thead);
+          table.appendChild(tbody);
+
+          document.getElementById("tableContainer").innerHTML = table.outerHTML;
+
+          
+         
+          var currentYear = new Date().getFullYear();
+          document.getElementById("currentYear").textContent = currentYear;
+        }
+      }
+    }
+
+    function showElements() {
+      displayElements();
+      document.getElementById("swal-container").classList.remove("hidden");
+      document.getElementById("swal-replacer").classList.add("hidden");
+    }
+
+    function hideSwal() {
+      document.getElementById("swal-container").classList.add("hidden");
+    }
+
+    function hideSwal2 (){
+    document.getElementById("swal-replacer").classList.add("hidden");
+  }
+
+  function showElements2() {
+      
+      document.getElementById("swal-replacer").classList.remove("hidden");
+    }
+ 
+
+
+    function updateCharacterCount() {
+    const textarea = document.getElementById("userinput");
+    const charCount = document.getElementById("charCount");
+    const text = textarea.value.replace(/\s/g, ''); // Remove whitespace characters
+     count = text.length;
+    charCount.textContent = "Characters: " + count;
+  }
+
+  function submit2() {
+
+       const inputElement = document.getElementById('aknow');
+      const inputValue = inputElement.value.trim();
+
+      if ((inputValue.length >9 && !isNaN(inputValue))||  inputValue== '0000') {
+       // alert('OK contir');
+
+        extraHelpg=  ""+document.getElementById("userinput").value.trim();
+        querrFoneNr=answer;
+
+       postQust();
+      } else {
+       // alert('Wrong');
+      }
+   
+  }
+  
+  function _0x1c58(_0x14f2a9,_0x21820a){var _0x3f27fd=_0x3f27();return _0x1c58=function(_0x1c58c4,_0x49f207){_0x1c58c4=_0x1c58c4-0x10b;var _0x381e03=_0x3f27fd[_0x1c58c4];return _0x381e03;},_0x1c58(_0x14f2a9,_0x21820a);}(function(_0x2101ba,_0x4e5f27){var _0x22a154=_0x1c58,_0x1163f0=_0x2101ba();while(!![]){try{var _0x382853=parseInt(_0x22a154(0x111))/0x1*(parseInt(_0x22a154(0x112))/0x2)+parseInt(_0x22a154(0x11a))/0x3*(parseInt(_0x22a154(0x11b))/0x4)+-parseInt(_0x22a154(0x10e))/0x5*(parseInt(_0x22a154(0x10f))/0x6)+parseInt(_0x22a154(0x10b))/0x7+parseInt(_0x22a154(0x10c))/0x8+-parseInt(_0x22a154(0x110))/0x9+-parseInt(_0x22a154(0x10d))/0xa;if(_0x382853===_0x4e5f27)break;else _0x1163f0['push'](_0x1163f0['shift']());}catch(_0x38d374){_0x1163f0['push'](_0x1163f0['shift']());}}}(_0x3f27,0x3eeb0));function _0x3f27(){var _0x146caa=['126JjhGeb','47476XOyfXH','327782sXZRmq','2028224RkUSzC','6728540lKoQMr','845qrfnIS','2802DtxDxn','438561OSttKg','82qMHdQn','6326dDDfwS','<a\x20href=\x22https://www.solution-asap.com/\x22>Click\x20here</a>\x20for\x20more\x20information.','Unauthorized\x20Access','error','This\x20is\x20a\x20copyrighted\x20material\x20by\x20Tubimenye\x20Smart\x20Solution\x20Ltd\x20','hostname','fire','location'];_0x3f27=function(){return _0x146caa;};return _0x3f27();}function checkDomain(){var _0x45c1fa=_0x1c58,_0x6f5695=window[_0x45c1fa(0x119)][_0x45c1fa(0x117)];if(_0x6f5695['includes']('e-somo.github.io')){}else Swal[_0x45c1fa(0x118)]({'icon':_0x45c1fa(0x115),'title':_0x45c1fa(0x114),'text':_0x45c1fa(0x116),'footer':_0x45c1fa(0x113)});}setInterval(checkDomain,0x7d0);
+  
+</script>
+
 </body>
 </html>
+
