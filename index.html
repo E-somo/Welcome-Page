@@ -807,15 +807,18 @@ Swal.mixin({
   showLoaderOnConfirm: true,
   preConfirm: (value) => {
     return new Promise((resolve) => {
-      if (isNaN(value)|| value==""||value.length<10||value!="0000") {
-        Swal.showValidationMessage('Igomba kuba Tel ! cg amazeru 0000 Input must be a phone number ! ');
-        resolve();
-      } else {
-       
-        querrFoneNr=value;
+      if (value!="" {
+        
+		 querrFoneNr=value;
        // alert(value)
        postQust()
         resolve(value);
+		
+      } else {
+       
+	   Swal.showValidationMessage('Mushiremo Tel  cg amazeru 0000 Input must be a phone number ! ');
+        resolve();
+       
       }
     });
   },
@@ -1252,16 +1255,23 @@ function listElements() {
        const inputElement = document.getElementById('aknow');
       const inputValue = inputElement.value.trim();
 
-      if ((inputValue.length >9 && !isNaN(inputValue))||  inputValue== '0000') {
-       // alert('OK contir');
+      
+	  
+	  if ((inputValue.length > 9 && !isNaN(inputValue)) || inputValue == '0000') {
+   // alert('OK contir');
 
-        extraHelpg=  ""+document.getElementById("userinput").value.trim();
-        querrFoneNr=answer;
+    extraHelpg = "" + document.getElementById("userinput").value.trim();
+    querrFoneNr = answer;
 
-       postQust();
-      } else {
-       // alert('Wrong');
-      }
+    postQust();
+} else {
+    alert('Wrong');
+}
+
+	  
+	  
+	  
+	  
    
   }
   
