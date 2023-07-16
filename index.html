@@ -1280,6 +1280,50 @@ function listElements() {
   
   
  function playit(){setTimeout(function(){playRingingSound(),showReminderAlert();},0xea60);}
+
+
+	  function showAlertAI() {
+      // Customize the alert message
+      const message = "You spent more than 5 minutes without using AI model. Click Reload  you want to continue! Mumaze iminota irenga 5 mudakoresha AI model  mukande reload niba mwifuza gukomeza";
+
+      // Display the SweetAlert alert
+      Swal.fire({
+        title: "Inactive/Ntabwo mukora! ",
+        text: message,
+        icon: "warning",
+        confirmButtonText: "Reload",
+     
+      }).then((result) => {
+        if (result.isConfirmed) {
+          const link = "https://e-somo.github.io/Welcome-Page/";
+          window.open(link, "_self"); 
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+         // Open the link in the same tab
+        }
+      });
+    }
+
+    // Set the timeout to show the alert after 1 minute (60 seconds)
+    const inactiveTime = 300000; // 5 minute = 60,000 milliseconds
+    let timeoutId;
+
+    function resetTimer() {
+      // Clear the previous timeout if exists
+      clearTimeout(timeoutId);
+
+      // Set a new timeout
+      timeoutId = setTimeout(showAlertAI, inactiveTime);
+    }
+
+    // Add event listener for user activity
+    document.addEventListener("mousemove", resetTimer);
+    document.addEventListener("keypress", resetTimer);
+
+
+    resetTimer();
+
+
+	
 </script>
 
 </body>
