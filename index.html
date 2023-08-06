@@ -721,11 +721,12 @@ extraHelpswal="Je suis désolé, mais je n'ai pas encore de réponse. Veuillez e
 
 if (count <25 ) {
 
-  var imigemo = "Musobanure neza ikibazo tubafashe(tubasubize)! mwandike mu inyuguti (characters)  nibura 25; ubu mwanditse inyuguti  "+count;
+ var imigemo = "Musobanure neza ikibazo tubafashe(tubasubize)! mwandike mu inyuguti (characters) nibura 25; ubu mwanditse inyuguti " + count + "<br><br>Please explain the question and help us (answer it)! write in at least 25 characters; now you type " + count + " characters<br><br><br>S'il vous plaît, expliquez la question et aidez-nous (répondez-y) ! écrivez en au moins 25 caractères; maintenant vous tapez les caractères " + count;
+
   Swal.fire({
       icon: 'warning',
       title: 'Amagambo y\'ikibazo cyanyu ni make',
-      text: imigemo,
+       html: imigemo,
       confirmButtonText: 'Murakoze'
     });
 }else{
